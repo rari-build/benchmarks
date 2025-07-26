@@ -1,0 +1,17 @@
+{
+  "timestamp": "2025-07-25T19:55:38.123Z",
+  "rari": {
+    "duration": 1585.552667,
+    "bundleSize": "399.89 kB",
+    "chunkCount": 13,
+    "warnings": 0,
+    "errors": 0
+  },
+  "nextjs": {
+    "duration": 9215.187708,
+    "bundleSize": "742.43 kB",
+    "chunkCount": 12,
+    "warnings": 0,
+    "errors": 0
+  }
+}

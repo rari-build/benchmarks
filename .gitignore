@@ -1,0 +1,7 @@
+**/target/
+bin/
+dist/
+node_modules/
+.next/
+.pnpm-store/
+.rari/
