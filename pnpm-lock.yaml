@@ -68,8 +68,8 @@ importers:
         specifier: ^14.1.0
         version: 14.1.0
       rari:
-        specifier: 0.2.16
-        version: 0.2.16(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.46.4)
+        specifier: 0.2.17
+        version: 0.2.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.46.4)
       react:
         specifier: ^19.1.0
         version: 19.1.0
@@ -1670,43 +1670,43 @@ packages:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
 
-  rari-darwin-arm64@0.2.11:
-    resolution: {integrity: sha512-5Q+SsprOVUpG2jDDnmDv0eBhIdEvfv3Jq3x/Oi2YMAmO5gW6iL3sNCAefAbZa+CZDOzam3TRlS49okwh7gBUHg==}
+  rari-darwin-arm64@0.2.12:
+    resolution: {integrity: sha512-4Pct/BkG0ep6uhiP5Y1o25pCotsmjbuJysxdpmufN5XbeKozqIbYIAgxXtEGar6mJ3kfXuUWGYRp/x4ZrSyd8w==}
     engines: {node: '>=20.0.0'}
     cpu: [arm64]
     os: [darwin]
     hasBin: true
 
-  rari-darwin-x64@0.2.11:
-    resolution: {integrity: sha512-pDStDKOzwVKmM4nRrwHHM1KsHIJK23jF7DdrOp/+EOstZcuNX1Pnz8D3r0SCOOKLMe5NjsdDACwWYBcDu6wBBQ==}
+  rari-darwin-x64@0.2.12:
+    resolution: {integrity: sha512-hyfb4paVj87EMv82K0dWh7PnMRDS9W4xBg0miCShAtMereXL3K198Ma5Ar/Ex4QfcLKn60cvIoGkK8HQqPlDKg==}
     engines: {node: '>=20.0.0'}
     cpu: [x64]
     os: [darwin]
     hasBin: true
 
-  rari-linux-arm64@0.2.11:
-    resolution: {integrity: sha512-XcGyHxEvLx6J/SRYpMKpGoF0ezwsUICMmdKmwlMpkLRJ3laZGD8mXmZbJ59Sy025OS2cc8dC74MS5dqUOBHZtw==}
+  rari-linux-arm64@0.2.12:
+    resolution: {integrity: sha512-D2NnOpHf6dZG8y8ApgwMw1wskd4IUyEFSE2vjgeYPlIQK50jBAoCevsvJqhgbqZN/8atbJWjxhEswlBY05F1zQ==}
     engines: {node: '>=20.0.0'}
     cpu: [arm64]
     os: [linux]
     hasBin: true
 
-  rari-linux-x64@0.2.11:
-    resolution: {integrity: sha512-BU5dY7nJklBL3QXpO+6GUgbWiQQBbAscwLvKf1pqbF+9VZd+0cMl7Hk1YaZCDxifCmV7LVy57VOhDr42fWkmeA==}
+  rari-linux-x64@0.2.12:
+    resolution: {integrity: sha512-eLvTAfih1xNQKWu3JIvUtqtl9nmNY1sZs8TvSdhoMRe6RWBm9AIO0FDBr2xlyI2NfCjhM0I5j2qO5nUHLmFzQw==}
     engines: {node: '>=20.0.0'}
     cpu: [x64]
     os: [linux]
     hasBin: true
 
-  rari-win32-x64@0.2.11:
-    resolution: {integrity: sha512-M3qGxVBeH7x+GDJjw/kyJEPz6cgK2t4NtgTAsnIwV5uPsOL6phc2r4CvvdS21Etbg4gZZq59y5nMctYW0MxRjg==}
+  rari-win32-x64@0.2.12:
+    resolution: {integrity: sha512-89IXNehMQ3IUjpT47FyKzzEMzRVpydQei5O0Y28wU7dZY6cDqRl8o8MCPHg7Z+WLVm1MBS/a1+BXqdQK+FXaeA==}
     engines: {node: '>=20.0.0'}
     cpu: [x64]
     os: [win32]
     hasBin: true
 
-  rari@0.2.16:
-    resolution: {integrity: sha512-D4jyVEuh3osA8Cjq2Dsfdi2v4M1VBoiLQ748wfj9kkKNnPec/mfShskDE+kHQCkR2uzpUHaY6mbFrvyqwBw8xA==}
+  rari@0.2.17:
+    resolution: {integrity: sha512-m26BikeK3o8KJd7ZPOKgLhMxdk6iFazdwuKC+ZVT/fB6Q8ukMUlctLZIq3oLt2NWjGPowEwSqXXCcOfW4OqgAw==}
     engines: {node: '>=20.0.0'}
     hasBin: true
     peerDependencies:
@@ -3328,22 +3328,22 @@ snapshots:
 
   punycode@2.3.1: {}
 
-  rari-darwin-arm64@0.2.11:
+  rari-darwin-arm64@0.2.12:
     optional: true
 
-  rari-darwin-x64@0.2.11:
+  rari-darwin-x64@0.2.12:
     optional: true
 
-  rari-linux-arm64@0.2.11:
+  rari-linux-arm64@0.2.12:
     optional: true
 
-  rari-linux-x64@0.2.11:
+  rari-linux-x64@0.2.12:
     optional: true
 
-  rari-win32-x64@0.2.11:
+  rari-win32-x64@0.2.12:
     optional: true
 
-  rari@0.2.16(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.46.4):
+  rari@0.2.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.46.4):
     dependencies:
       acorn: 8.15.0
       esbuild: 0.25.9
@@ -3352,11 +3352,11 @@ snapshots:
       react-dom: 19.1.0(react@19.1.0)
       rollup-plugin-esbuild: 6.2.1(esbuild@0.25.9)(rollup@4.46.4)
     optionalDependencies:
-      rari-darwin-arm64: 0.2.11
-      rari-darwin-x64: 0.2.11
-      rari-linux-arm64: 0.2.11
-      rari-linux-x64: 0.2.11
-      rari-win32-x64: 0.2.11
+      rari-darwin-arm64: 0.2.12
+      rari-darwin-x64: 0.2.12
+      rari-linux-arm64: 0.2.12
+      rari-linux-x64: 0.2.12
+      rari-win32-x64: 0.2.12
     transitivePeerDependencies:
       - rollup
       - supports-color
