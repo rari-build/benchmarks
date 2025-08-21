@@ -68,8 +68,8 @@ importers:
         specifier: ^14.1.0
         version: 14.1.0
       rari:
-        specifier: ^0.2.14
-        version: 0.2.14(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.46.4)
+        specifier: 0.2.16
+        version: 0.2.16(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.46.4)
       react:
         specifier: ^19.1.0
         version: 19.1.0
@@ -1670,43 +1670,43 @@ packages:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
 
-  rari-darwin-arm64@0.2.9:
-    resolution: {integrity: sha512-vowQlWS85aqMMZdnVYaTbn6YICVSTgxzcD7gGn0SFxrBpp+vaCbfRXwv78uOIb5iW1lIdxINECettU5CRZvQzQ==}
+  rari-darwin-arm64@0.2.11:
+    resolution: {integrity: sha512-5Q+SsprOVUpG2jDDnmDv0eBhIdEvfv3Jq3x/Oi2YMAmO5gW6iL3sNCAefAbZa+CZDOzam3TRlS49okwh7gBUHg==}
     engines: {node: '>=20.0.0'}
     cpu: [arm64]
     os: [darwin]
     hasBin: true
 
-  rari-darwin-x64@0.2.9:
-    resolution: {integrity: sha512-LJ9gffMGjHKGt/Hth5YKgtq7TaiunRz9+0ZXd6YsNaToNFG4csT1ykOF/Nio3sAastbJ3fY92DLc+qfv6AVPeg==}
+  rari-darwin-x64@0.2.11:
+    resolution: {integrity: sha512-pDStDKOzwVKmM4nRrwHHM1KsHIJK23jF7DdrOp/+EOstZcuNX1Pnz8D3r0SCOOKLMe5NjsdDACwWYBcDu6wBBQ==}
     engines: {node: '>=20.0.0'}
     cpu: [x64]
     os: [darwin]
     hasBin: true
 
-  rari-linux-arm64@0.2.9:
-    resolution: {integrity: sha512-Grm7p7lCVISwS6oR8dKVroE6Q5gn9Xr+v7TCBoE1dA4NfMcpVFIwfkjy6u+z+1aATSHlEDTUSY3mv5xLBBX/Tw==}
+  rari-linux-arm64@0.2.11:
+    resolution: {integrity: sha512-XcGyHxEvLx6J/SRYpMKpGoF0ezwsUICMmdKmwlMpkLRJ3laZGD8mXmZbJ59Sy025OS2cc8dC74MS5dqUOBHZtw==}
     engines: {node: '>=20.0.0'}
     cpu: [arm64]
     os: [linux]
     hasBin: true
 
-  rari-linux-x64@0.2.9:
-    resolution: {integrity: sha512-ICVMpqu4cgEoTDj9VKqRD0uk6jte445jWE6ZT3se+el66LFmMSdd+7J51yciCz+0Qc1g5SulOe9OlA7vD2w7Xg==}
+  rari-linux-x64@0.2.11:
+    resolution: {integrity: sha512-BU5dY7nJklBL3QXpO+6GUgbWiQQBbAscwLvKf1pqbF+9VZd+0cMl7Hk1YaZCDxifCmV7LVy57VOhDr42fWkmeA==}
     engines: {node: '>=20.0.0'}
     cpu: [x64]
     os: [linux]
     hasBin: true
 
-  rari-win32-x64@0.2.9:
-    resolution: {integrity: sha512-mfqCNEjx/khU67yF/YRVDDXYsQzfcTmoNoXCLSTa/NiLEwzJFE3DeJIHf1JTKas73Y+WbkdWRNDSOM2YeZ0KOQ==}
+  rari-win32-x64@0.2.11:
+    resolution: {integrity: sha512-M3qGxVBeH7x+GDJjw/kyJEPz6cgK2t4NtgTAsnIwV5uPsOL6phc2r4CvvdS21Etbg4gZZq59y5nMctYW0MxRjg==}
     engines: {node: '>=20.0.0'}
     cpu: [x64]
     os: [win32]
     hasBin: true
 
-  rari@0.2.14:
-    resolution: {integrity: sha512-VgcCerq6lrAVU24cDeRYxkRFyd+yWXcYftCSsW4LLWHfukH1mae6qUwkIld5kXoYUTsxd3xpLeo+x1E5g7edxg==}
+  rari@0.2.16:
+    resolution: {integrity: sha512-D4jyVEuh3osA8Cjq2Dsfdi2v4M1VBoiLQ748wfj9kkKNnPec/mfShskDE+kHQCkR2uzpUHaY6mbFrvyqwBw8xA==}
     engines: {node: '>=20.0.0'}
     hasBin: true
     peerDependencies:
@@ -3328,22 +3328,22 @@ snapshots:
 
   punycode@2.3.1: {}
 
-  rari-darwin-arm64@0.2.9:
+  rari-darwin-arm64@0.2.11:
     optional: true
 
-  rari-darwin-x64@0.2.9:
+  rari-darwin-x64@0.2.11:
     optional: true
 
-  rari-linux-arm64@0.2.9:
+  rari-linux-arm64@0.2.11:
     optional: true
 
-  rari-linux-x64@0.2.9:
+  rari-linux-x64@0.2.11:
     optional: true
 
-  rari-win32-x64@0.2.9:
+  rari-win32-x64@0.2.11:
     optional: true
 
-  rari@0.2.14(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.46.4):
+  rari@0.2.16(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.46.4):
     dependencies:
       acorn: 8.15.0
       esbuild: 0.25.9
@@ -3352,11 +3352,11 @@ snapshots:
       react-dom: 19.1.0(react@19.1.0)
       rollup-plugin-esbuild: 6.2.1(esbuild@0.25.9)(rollup@4.46.4)
     optionalDependencies:
-      rari-darwin-arm64: 0.2.9
-      rari-darwin-x64: 0.2.9
-      rari-linux-arm64: 0.2.9
-      rari-linux-x64: 0.2.9
-      rari-win32-x64: 0.2.9
+      rari-darwin-arm64: 0.2.11
+      rari-darwin-x64: 0.2.11
+      rari-linux-arm64: 0.2.11
+      rari-linux-x64: 0.2.11
+      rari-win32-x64: 0.2.11
     transitivePeerDependencies:
       - rollup
       - supports-color
