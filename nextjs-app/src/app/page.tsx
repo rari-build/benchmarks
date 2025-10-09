@@ -6,6 +6,9 @@ import ShoppingList from '../components/ShoppingList'
 import TestComponent from '../components/TestComponent'
 import WhatsHot from '../components/WhatsHot'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">

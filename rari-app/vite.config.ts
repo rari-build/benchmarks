@@ -1,5 +1,5 @@
 import tailwindcss from '@tailwindcss/vite'
-import { rari, rariRouter } from 'rari'
+import { rari, rariRouter } from 'rari/server'
 import { defineConfig } from 'rolldown-vite'
 
 export default defineConfig({

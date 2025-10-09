@@ -1,13 +1,13 @@
-import Counter from './components/Counter'
-import EnvTestComponent from './components/EnvTestComponent'
-import FetchExample from './components/FetchExample'
-import Markdown from './components/Markdown'
-import ServerWithClient from './components/ServerWithClient'
-import ShoppingList from './components/ShoppingList'
-import TestComponent from './components/TestComponent'
-import WhatsHot from './components/WhatsHot'
+import Counter from '../components/Counter'
+import EnvTestComponent from '../components/EnvTestComponent'
+import FetchExample from '../components/FetchExample'
+import Markdown from '../components/Markdown'
+import ServerWithClient from '../components/ServerWithClient'
+import ShoppingList from '../components/ShoppingList'
+import TestComponent from '../components/TestComponent'
+import WhatsHot from '../components/WhatsHot'
 
-function App() {
+export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
       <div className="max-w-6xl mx-auto space-y-8">
@@ -125,4 +125,7 @@ function App() {
   )
 }
 
-export default App
+export const metadata = {
+  title: 'Rari Framework Benchmark',
+  description: 'Server Component Performance Testing Suite',
+}
