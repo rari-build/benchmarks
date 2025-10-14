@@ -9,7 +9,9 @@ export default function RootLayout({ children }: LayoutProps) {
         <title>Rari Framework Benchmark</title>
       </head>
       <body className="min-h-full bg-gray-50">
-        {children}
+        <div id="root">
+          {children}
+        </div>
       </body>
     </html>
   )

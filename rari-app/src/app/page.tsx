@@ -125,7 +125,8 @@ export default function HomePage() {
   )
 }
 
-export const metadata = {
-  title: 'Rari Framework Benchmark',
-  description: 'Server Component Performance Testing Suite',
-}
+// Temporarily commented out due to globalThis conflict
+// export const metadata = {
+//   title: 'Rari Framework Benchmark',
+//   description: 'Server Component Performance Testing Suite',
+// }

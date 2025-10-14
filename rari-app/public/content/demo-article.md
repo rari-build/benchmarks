@@ -20,8 +20,6 @@ When markdown is processed on the server:
 ## 🚀 Implementation Example
 
 ```tsx
-'use server'
-
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import MarkdownIt from 'markdown-it'

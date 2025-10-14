@@ -1,5 +1,3 @@
-'use server'
-
 /**
  * Get the list of grocery items
  */
