@@ -10,8 +10,8 @@ const MODE = process.env.BENCHMARK_MODE || 'development'
 const IS_PRODUCTION = MODE === 'production'
 const RARI_PORT = IS_PRODUCTION ? 3000 : 5173
 const NEXTJS_PORT = IS_PRODUCTION ? 3001 : 3000
-const WARMUP_REQUESTS = 5
-const TEST_REQUESTS = 10
+const WARMUP_REQUESTS = 50
+const TEST_REQUESTS = 20
 
 const SCENARIOS = [
   { path: '/', name: 'Homepage (All Components)' },
@@ -52,7 +52,7 @@ async function measureRequest(url, requests = TEST_REQUESTS) {
       errors++
     }
 
-    await new Promise(resolve => setTimeout(resolve, 50))
+    await new Promise(resolve => setTimeout(resolve, 10))
   }
 
   if (times.length === 0) {
