@@ -1,4 +1,5 @@
 import Counter from '../components/Counter'
+import EnvTestComponent from '../components/EnvTestComponent'
 import FetchExample from '../components/FetchExample'
 import Markdown from '../components/Markdown'
 import ServerWithClient from '../components/ServerWithClient'
@@ -65,6 +66,12 @@ export default function Home() {
             <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">What's Hot</h3>
               <WhatsHot />
+            </div>
+
+            {/* Environment Test */}
+            <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">Environment Test</h3>
+              <EnvTestComponent />
             </div>
 
             {/* Fetch Example */}
