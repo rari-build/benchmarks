@@ -7,8 +7,7 @@ import ShoppingList from '../components/ShoppingList'
 import TestComponent from '../components/TestComponent'
 import WhatsHot from '../components/WhatsHot'
 
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
+export const revalidate = false
 
 export default function Home() {
   return (
