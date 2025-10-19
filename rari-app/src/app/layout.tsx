@@ -7,18 +7,5 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }: LayoutProps) {
-  return (
-    <html lang="en" className="h-full">
-      <head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Rari Framework Benchmark</title>
-      </head>
-      <body className="min-h-full bg-gray-50">
-        <div id="root">
-          {children}
-        </div>
-      </body>
-    </html>
-  )
+  return <div className="min-h-full">{children}</div>
 }
