@@ -11,7 +11,7 @@ export const revalidate = false
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 py-8 px-4">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
         <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-200 text-center">
