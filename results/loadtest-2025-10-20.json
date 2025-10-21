@@ -1,0 +1,73 @@
+{
+  "timestamp": "2025-10-20T01:20:36.976Z",
+  "config": {
+    "duration": 30,
+    "connections": 50,
+    "pipelining": 1,
+    "timeout": 10
+  },
+  "rari": {
+    "requests": {
+      "total": 607784,
+      "average": 20258.67,
+      "mean": 20258.67,
+      "stddev": 464.67,
+      "min": 18879,
+      "max": 22149
+    },
+    "latency": {
+      "average": 2.04,
+      "mean": 2.04,
+      "stddev": 0.42,
+      "min": 1,
+      "max": 21,
+      "p50": 2,
+      "p90": 2,
+      "p99": 4
+    },
+    "throughput": {
+      "average": 574274491.74,
+      "mean": 574274491.74,
+      "stddev": 13135414.92,
+      "min": 535125255,
+      "max": 627813405
+    },
+    "errors": 0,
+    "timeouts": 0,
+    "duration": 30.05,
+    "start": "2025-10-20T01:19:34.906Z",
+    "finish": "2025-10-20T01:20:04.954Z"
+  },
+  "nextjs": {
+    "requests": {
+      "total": 58054,
+      "average": 1935.14,
+      "mean": 1935.14,
+      "stddev": 109.5,
+      "min": 1504,
+      "max": 2002
+    },
+    "latency": {
+      "average": 25.25,
+      "mean": 25.25,
+      "stddev": 12.18,
+      "min": 3,
+      "max": 834,
+      "p50": 24,
+      "p90": 28,
+      "p99": 48
+    },
+    "throughput": {
+      "average": 167836603.74,
+      "mean": 167836603.74,
+      "stddev": 9499738.34,
+      "min": 130431392,
+      "max": 173619446
+    },
+    "errors": 0,
+    "timeouts": 0,
+    "duration": 30.01,
+    "start": "2025-10-20T01:20:06.961Z",
+    "finish": "2025-10-20T01:20:36.969Z"
+  }
+}
