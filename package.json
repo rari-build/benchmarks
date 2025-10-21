@@ -20,6 +20,6 @@
     "picocolors": "^1.1.1"
   },
   "devDependencies": {
-    "@types/node": "^20.19.21"
+    "@types/node": "^20.19.23"
   }
 }
