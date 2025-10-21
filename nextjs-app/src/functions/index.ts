@@ -1,7 +1,6 @@
-'use server'
-
 /**
  * Get the list of grocery items
+ * @returns {Promise<Array<{id: number, text: string, completed: boolean}>>} Array of grocery items
  */
 export async function getTodosList() {
   const groceries = [
@@ -21,18 +20,16 @@ export async function getTodosList() {
 }
 
 /**
- * Simple server function for testing
+ * Add two numbers on the server
+ * @param {number} a
+ * @param {number} b
+ * @returns {Promise<number>} Sum of the two numbers
  */
 export async function add(a: number, b: number): Promise<number> {
-  // Simulate some async work
-  await new Promise(resolve => setTimeout(resolve, 1))
-  return a + b
-}
+  const numA = Number(a)
+  const numB = Number(b)
 
-/**
- * Another test function for demonstration
- */
-export async function multiply(a: number, b: number): Promise<number> {
-  await new Promise(resolve => setTimeout(resolve, 1))
-  return a * b
+  const result = numA + numB
+
+  return result
 }

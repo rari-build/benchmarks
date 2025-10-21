@@ -1,4 +1,5 @@
 import Counter from '../components/Counter'
+import EnvTestComponent from '../components/EnvTestComponent'
 import FetchExample from '../components/FetchExample'
 import Markdown from '../components/Markdown'
 import ServerWithClient from '../components/ServerWithClient'
@@ -6,9 +7,11 @@ import ShoppingList from '../components/ShoppingList'
 import TestComponent from '../components/TestComponent'
 import WhatsHot from '../components/WhatsHot'
 
+export const revalidate = false
+
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 py-8 px-4">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
         <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-200 text-center">
@@ -62,6 +65,12 @@ export default function Home() {
             <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">What's Hot</h3>
               <WhatsHot />
+            </div>
+
+            {/* Environment Test */}
+            <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">Environment Test</h3>
+              <EnvTestComponent />
             </div>
 
             {/* Fetch Example */}
