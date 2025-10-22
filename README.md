@@ -32,9 +32,9 @@ benchmarks/
 │   └── utils/              # Benchmark utilities and helpers
 ├── rari-app/               # Rari test application
 │   ├── src/
+│   │   ├── app/            # App Router structure
 │   │   ├── components/
-│   │   ├── pages/
-│   │   └── functions/
+│   │   └── actions/
 │   ├── package.json
 │   └── vite.config.ts
 ├── nextjs-app/             # Next.js equivalent application
@@ -66,20 +66,27 @@ benchmarks/
 # Install dependencies for both apps
 cd benchmarks/rari-app && pnpm install
 cd ../nextjs-app && pnpm install
-cd ../scripts && pnpm install
+
+# Install benchmark scripts dependencies
+cd .. && pnpm install
 ```
 
 ### Run Benchmarks
 ```bash
-# Run complete benchmark suite
-cd benchmarks/scripts
-pnpm run benchmark:all
+# From benchmarks/ directory
+
+# Run complete benchmark suite (development mode)
+pnpm run benchmark:all:dev
+
+# Run complete benchmark suite (production mode)
+pnpm run benchmark:all:prod
 
 # Run specific benchmarks
-pnpm run benchmark:performance  # Server performance
-pnpm run benchmark:build       # Build times
-pnpm run benchmark:memory      # Memory usage
-pnpm run benchmark:load        # Load testing
+pnpm run benchmark:dev      # Server performance (dev mode)
+pnpm run benchmark:prod     # Server performance (prod mode)
+pnpm run loadtest:dev       # Load testing (dev mode)
+pnpm run loadtest:prod      # Load testing (prod mode)
+pnpm run buildtest          # Build times comparison
 ```
 
 ## Test Scenarios
@@ -135,9 +142,10 @@ pnpm run benchmark:load        # Load testing
 Both applications are configured to be as equivalent as possible:
 
 ### Rari App Features
-- File-based routing with dynamic routes
-- Server components with data fetching
-- Client components for interactivity
+- App Router with file-based routing and dynamic routes
+- Server components by default with data fetching
+- Client components for interactivity ('use client')
+- Server actions for mutations ('use server')
 - TypeScript throughout
 - Tailwind CSS for styling
 - Error boundaries and loading states
@@ -145,20 +153,22 @@ Both applications are configured to be as equivalent as possible:
 ### Next.js App Features
 - App Router with equivalent route structure
 - Server Components and Client Components
+- Server Actions for mutations
 - Same data fetching patterns
 - Identical TypeScript configuration
 - Same Tailwind CSS setup
 - Equivalent error handling
 
-## Expected Results
+## Actual Results
 
-Based on Rari's architecture, we expect to see:
+Based on our benchmarks, Rari delivers:
 
 ### Performance Advantages
-- **2-4x faster** server component rendering
-- **Lower memory usage** due to Rust runtime efficiency
-- **Better concurrent handling** with async Rust performance
-- **Faster cold starts** with optimized runtime
+- **3.8x faster** response times (0.69ms vs 2.58ms avg)
+- **10.5x higher** throughput (20,226 vs 1,934 req/sec)
+- **12x faster** P99 latency under load (4ms vs 48ms)
+- **68% smaller** client bundles (27.6 KB vs 85.9 KB)
+- **5.6x faster** builds (1.64s vs 9.11s)
 
 ### Trade-offs
 - **Ecosystem maturity** - Next.js has broader ecosystem
@@ -170,27 +180,30 @@ Based on Rari's architecture, we expect to see:
 
 ### Performance Testing
 ```bash
-# Start applications
-cd rari-app && pnpm dev &
-cd nextjs-app && pnpm dev &
+# From benchmarks/ directory
 
-# Run performance comparison
-cd scripts && pnpm run test:performance
+# Development mode (apps will be started automatically)
+pnpm run benchmark:dev
+
+# Production mode (apps will be built and started automatically)
+pnpm run benchmark:prod
 ```
 
 ### Load Testing
 ```bash
-# Production builds
-cd rari-app && pnpm build && pnpm start &
-cd nextjs-app && pnpm build && pnpm start &
+# From benchmarks/ directory
 
-# Load test
-cd scripts && pnpm run test:load
+# Development mode
+pnpm run loadtest:dev
+
+# Production mode (recommended for accurate results)
+pnpm run loadtest:prod
 ```
 
-### Memory Profiling
+### Build Time Testing
 ```bash
-cd scripts && pnpm run test:memory
+# From benchmarks/ directory
+pnpm run buildtest
 ```
 
 ## Contributing
