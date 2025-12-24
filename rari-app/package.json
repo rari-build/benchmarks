@@ -18,20 +18,20 @@
   "dependencies": {
     "markdown-it": "^14.1.0",
     "rari": "latest",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1"
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.1.17",
+    "@tailwindcss/vite": "^4.1.18",
     "@types/markdown-it": "^14.1.2",
-    "@types/node": "^24.10.1",
+    "@types/node": "^24.10.4",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "@typescript/native-preview": "7.0.0-dev.20251204.1",
+    "@typescript/native-preview": "^7.0.0-dev.20251223.1",
     "@vitejs/plugin-react-oxc": "^0.4.3",
-    "eslint": "^9.39.1",
-    "oxlint": "^1.31.0",
-    "rolldown-vite": "^7.2.10",
-    "tailwindcss": "^4.1.17"
+    "eslint": "^9.39.2",
+    "oxlint": "^1.35.0",
+    "rolldown-vite": "^7.3.0",
+    "tailwindcss": "^4.1.18"
   }
 }
