@@ -19,7 +19,7 @@ export default function Counter() {
           -
         </button>
 
-        <span className="text-2xl font-bold text-blue-600 min-w-[2rem] text-center">
+        <span className="text-2xl font-bold text-blue-600 min-w-8 text-center">
           {count}
         </span>
 

@@ -92,7 +92,7 @@ export default function HomePage() {
         </div>
 
         {/* Performance Summary */}
-        <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-8 border border-green-200">
+        <div className="bg-linear-to-r from-green-50 to-blue-50 rounded-xl p-8 border border-green-200">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">📈 Benchmark Summary</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <div className="bg-white p-4 rounded-lg text-center">

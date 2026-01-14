@@ -1,4 +1,4 @@
-import type { LayoutProps } from 'rari/client'
+import type { LayoutProps } from 'rari'
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const metadata = {
