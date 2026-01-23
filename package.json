@@ -16,10 +16,10 @@
   "dependencies": {
     "autocannon": "^8.0.0",
     "cli-table3": "^0.6.5",
-    "inquirer": "^13.2.0",
+    "inquirer": "^13.2.1",
     "picocolors": "^1.1.1"
   },
   "devDependencies": {
-    "@types/node": "^25.0.8"
+    "@types/node": "^25.0.10"
   }
 }

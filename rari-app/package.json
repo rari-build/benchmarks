@@ -17,19 +17,19 @@
   },
   "dependencies": {
     "markdown-it": "^14.1.0",
-    "rari": "^0.7.4",
+    "rari": "^0.7.8",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.18",
     "@types/markdown-it": "^14.1.2",
-    "@types/node": "^24.10.8",
-    "@types/react": "^19.2.8",
+    "@types/node": "^24.10.9",
+    "@types/react": "^19.2.9",
     "@types/react-dom": "^19.2.3",
-    "@typescript/native-preview": "^7.0.0-dev.20260114.1",
+    "@typescript/native-preview": "^7.0.0-dev.20260123.3",
     "eslint": "^9.39.2",
-    "oxlint": "^1.39.0",
+    "oxlint": "^1.41.0",
     "rolldown-vite": "^7.3.1",
     "tailwindcss": "^4.1.18"
   }
