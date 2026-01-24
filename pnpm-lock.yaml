@@ -68,8 +68,8 @@ importers:
         specifier: ^14.1.0
         version: 14.1.0
       rari:
-        specifier: ^0.7.8
-        version: 0.7.8(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        specifier: ^0.7.9
+        version: 0.7.9(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react:
         specifier: ^19.2.3
         version: 19.2.3
@@ -1156,11 +1156,6 @@ packages:
     resolution: {integrity: sha512-VE8ebP25U8B3XNIe1azQka7ty+lgYse7j8UtKuEbbC2G8JL/QY2iGIFaeR936h6ezPIjSDsHVNlsV5C5VQY5qA==}
     hasBin: true
 
-  acorn@8.15.0:
-    resolution: {integrity: sha512-NZyJarBfL7nWwIq+FDL6Zp/yHEhePMNnnJ0y3qfieCrmNvYct8uvtiV41UvlSe6apAfk0fY1FbWx+NwfmpvtTg==}
-    engines: {node: '>=0.4.0'}
-    hasBin: true
-
   ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
     engines: {node: '>=8'}
@@ -1599,8 +1594,8 @@ packages:
     os: [win32]
     hasBin: true
 
-  rari@0.7.8:
-    resolution: {integrity: sha512-oEcwSQUlYas1EOttUrimQzFlqX0Mf26YDiqxn+j/RS6qARzhiol6FXaunCl7gmy4oo96B+GQo8YLJvV+PNCyzg==}
+  rari@0.7.9:
+    resolution: {integrity: sha512-pNYqD5FuXbYv0VcWMTorYNVmdZCFB/N1YVv9+YtrCpQ14kVEco2K7irZg3uQyUVRtACr+PH8paQJEHdorkYS3A==}
     engines: {node: '>=20.0.0'}
     hasBin: true
     peerDependencies:
@@ -2542,8 +2537,6 @@ snapshots:
       '@typescript/native-preview-win32-arm64': 7.0.0-dev.20260123.3
       '@typescript/native-preview-win32-x64': 7.0.0-dev.20260123.3
 
-  acorn@8.15.0: {}
-
   ansi-regex@5.0.1: {}
 
   ansi-regex@6.2.2: {}
@@ -2974,11 +2967,9 @@ snapshots:
   rari-win32-x64@0.7.8:
     optional: true
 
-  rari@0.7.8(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
+  rari@0.7.9(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
     dependencies:
-      acorn: 8.15.0
       esbuild: 0.27.2
-      picocolors: 1.1.1
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
     optionalDependencies:
