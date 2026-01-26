@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { cwd } from 'node:process'
+import MarkdownIt from 'markdown-it'
 
 interface MarkdownTestProps {
   filePath?: string
@@ -10,9 +11,6 @@ export default async function MarkdownTest({
   filePath = 'demo-article.md',
 }: MarkdownTestProps) {
   try {
-    const MarkdownIt = (await import('markdown-it')).default
-
-    // Try different paths: dist/content (production from project root), content/ (production from dist), public/content/ (development)
     const distPath = join(cwd(), 'dist', 'content', filePath)
     const contentPath = join(cwd(), 'content', filePath)
     const publicPath = join(cwd(), 'public', 'content', filePath)
