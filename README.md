@@ -126,25 +126,33 @@ Both applications are configured to be as equivalent as possible:
 
 ## Actual Results
 
-Based on the latest benchmark run (2026-01-15):
-
-### Performance Benchmark
-- **rari average response time**: 1.32ms
-- **Next.js average response time**: 2.63ms
-- **rari is 49.7% faster** in response time
-- **rari bundle size**: ~28KB
-- **Next.js bundle size**: ~82KB
-- **rari bundles are 65.7% smaller**
+Based on the latest benchmark run (January 26, 2026):
 
 ### Build Performance
-- **rari build time**: ~1.6s
-- **Next.js build time**: ~9.1s
-- **rari builds 5.6x faster**
+- **rari build time**: 1.41s
+- **Next.js build time**: 4.10s
+- **rari builds 65.6% faster**
+- **rari client bundle**: 266.04 KB (2 files)
+- **Next.js client bundle**: 564.84 KB (8 files)
 
-### Load Test Performance
-- **rari throughput**: Higher requests/sec under concurrent load
-- **rari P95 latency**: Lower latency under stress
-- **Both frameworks**: 100% success rate in standard testing
+### Performance Benchmark
+- **rari average response time**: 0.35ms
+- **Next.js average response time**: 2.64ms
+- **rari is 86.6% faster** in response time
+- **rari P95 latency**: 0.38ms
+- **Next.js P95 latency**: 3.44ms
+- **rari response size**: 33,389 bytes
+- **Next.js response size**: 84,317 bytes
+
+### Load Test Performance (30s duration, 50 concurrent connections)
+- **rari throughput**: 14,085.06 req/sec
+- **Next.js throughput**: 1,624.41 req/sec
+- **rari handles 767.1% more requests/sec**
+- **rari average latency**: 3.55ms (P95: 5.78ms)
+- **Next.js average latency**: 30.79ms (P95: 38.43ms)
+- **rari is 88.5% faster** under load
+- **Total requests**: rari: 422,604 | Next.js: 48,736
+- **Both frameworks**: 0 errors, 0 timeouts (100% success rate)
 
 ## Running Individual Tests
 
