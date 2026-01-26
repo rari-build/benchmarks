@@ -28,7 +28,6 @@ The benchmark suite tests a single comprehensive homepage route (`/`) that inclu
 - **Static rendering** - All components rendered server-side
 - **Real-world complexity** - Mix of simple and complex components with various rendering patterns
 
-
 ## Quick Start
 
 ### Prerequisites
