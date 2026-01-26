@@ -1,3 +1,31 @@
+catalogMode: prefer
+shellEmulator: true
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  - semver@6.3.1
+
 packages:
-  - 'nextjs-app'
-  - 'rari-app'
+  - nextjs-app
+  - rari-app
+catalogs:
+  build:
+    rolldown-vite: ^7.3.1
+  default:
+    '@types/node': ^24.10.9
+    '@typescript/native-preview': ^7.0.0-dev.20260126.1
+    rari: ^0.7.11
+    typescript: ^5.9.3
+  md:
+    '@types/markdown-it': ^14.1.2
+    markdown-it: ^14.1.0
+  nextjs:
+    next: ^16.0.11
+  react:
+    '@types/react': ^19.2.9
+    '@types/react-dom': ^19.2.3
+    react: ^19.2.4
+    react-dom: ^19.2.4
+  tailwind:
+    '@tailwindcss/postcss': ^4.1.18
+    '@tailwindcss/vite': ^4.1.18
+    tailwindcss: ^4.1.18

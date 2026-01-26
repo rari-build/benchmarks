@@ -5,21 +5,21 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "NODE_ENV=production next build",
-    "start": "next start"
+    "start": "PORT=3001 next start"
   },
   "dependencies": {
-    "@types/markdown-it": "^14.1.2",
-    "markdown-it": "^14.1.0",
-    "next": "16.0.7",
-    "react": "19.2.1",
-    "react-dom": "19.2.1"
+    "@types/markdown-it": "catalog:md",
+    "markdown-it": "catalog:md",
+    "next": "catalog:nextjs",
+    "react": "catalog:react",
+    "react-dom": "catalog:react"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.18",
-    "@types/node": "^24.10.9",
-    "@types/react": "^19.2.9",
-    "@types/react-dom": "^19.2.3",
-    "tailwindcss": "^4.1.18",
-    "typescript": "^5.9.3"
+    "@tailwindcss/postcss": "catalog:tailwind",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:react",
+    "@types/react-dom": "catalog:react",
+    "tailwindcss": "catalog:tailwind",
+    "typescript": "catalog:"
   }
 }
