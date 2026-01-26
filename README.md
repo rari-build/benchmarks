@@ -147,12 +147,6 @@ Based on the latest benchmark run (2026-01-15):
 - **rari P95 latency**: Lower latency under stress
 - **Both frameworks**: 100% success rate in standard testing
 
-### Trade-offs
-- **Ecosystem maturity** - Next.js has broader ecosystem and more third-party integrations
-- **Development tooling** - Next.js has more mature dev tools and debugging support
-- **Community support** - Next.js has larger community and more resources
-- **Production stability** - Next.js has longer production track record
-
 ## Running Individual Tests
 
 ### Starting Servers
