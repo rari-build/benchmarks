@@ -1,0 +1,28 @@
+[package]
+name = "rari-benchmark"
+version = "0.1.0"
+authors = { workspace = true }
+edition = { workspace = true }
+license = { workspace = true }
+
+[[bin]]
+name = "build-times"
+path = "src/build_times.rs"
+
+[[bin]]
+name = "load-test"
+path = "src/load_test.rs"
+
+[[bin]]
+name = "performance"
+path = "src/performance.rs"
+
+[dependencies]
+tokio = { version = "1.49.0", features = ["full", "process"] }
+anyhow = "1.0.100"
+clap = { version = "4.5.54", features = ["derive"] }
+colored = "3.1.1"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
+reqwest = { version = "0.13.1", features = ["json"] }
+tabled = "0.20.0"

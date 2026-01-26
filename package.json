@@ -1,25 +1,7 @@
 {
-  "name": "rari-nextjs-benchmark-scripts",
+  "name": "rari-nextjs-benchmarks",
   "type": "module",
   "version": "0.1.0",
   "private": true,
-  "description": "Performance benchmark scripts for Rari vs Next.js comparison",
-  "scripts": {
-    "benchmark:dev": "node scripts/performance.js",
-    "benchmark:prod": "BENCHMARK_MODE=production node scripts/performance.js",
-    "loadtest:dev": "node scripts/load-test.js",
-    "loadtest:prod": "BENCHMARK_MODE=production node scripts/load-test.js",
-    "buildtest": "node scripts/build-times.js",
-    "benchmark:all:dev": "npm run benchmark:dev && npm run loadtest:dev && npm run buildtest",
-    "benchmark:all:prod": "npm run benchmark:prod && npm run loadtest:prod && npm run buildtest"
-  },
-  "dependencies": {
-    "autocannon": "^8.0.0",
-    "cli-table3": "^0.6.5",
-    "inquirer": "^13.2.1",
-    "picocolors": "^1.1.1"
-  },
-  "devDependencies": {
-    "@types/node": "^25.0.10"
-  }
+  "description": "Performance benchmarks for rari vs Next.js comparison"
 }

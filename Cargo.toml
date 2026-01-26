@@ -1,0 +1,9 @@
+[workspace]
+members = ["tools/benchmark"]
+resolver = "2"
+
+[workspace.package]
+authors = ["Ryan Skinner"]
+edition = "2024"
+license = "MIT"
+repository = "https://github.com/rari-build/benchmarks"

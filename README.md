@@ -1,209 +1,250 @@
-# Rari vs Next.js Benchmark Suite
+<a href="https://rari.build" target="_blank">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset=".github/assets/rari-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset=".github/assets/rari-light.svg">
+    <img alt="rari" src=".github/assets/rari-light.svg" width="200">
+  </picture>
+</a>
 
-This benchmark suite provides a comprehensive comparison between **Rari** (Rust-powered React Server Components) and **Next.js** (Node.js-based React framework).
+> Runtime Accelerated Rendering Infrastructure
+
+# rari vs Next.js Benchmark Suite
+
+This benchmark suite provides a comprehensive comparison between **rari** (Rust-powered React Server Components) and **Next.js** (Node.js-based React framework).
 
 ## Benchmark Objectives
 
 ### Performance Metrics
-- **Server-side rendering speed** - Time to render components on server
-- **Time to First Byte (TTFB)** - Server response latency
+- **Server-side rendering speed** - Time to render all components on server
+- **Time to First Byte (TTFB)** - Server response latency (P50, P95, P99)
 - **Bundle size comparison** - Client-side JavaScript payload
-- **Memory usage** - Runtime memory consumption
-- **Concurrent request handling** - Throughput under load
-- **Build times** - Development and production build speeds
-- **Cold start performance** - Initial server startup time
+- **Build times** - Production build speeds
+- **Concurrent request handling** - Throughput under load (requests/sec)
+- **Memory usage** - Runtime memory consumption under load
 
-### Feature Parity Testing
-- **Server Components** - RSC rendering capabilities
-- **File-based routing** - Route generation and navigation
-- **Data fetching** - Server-side data loading patterns
-- **Streaming** - Progressive content delivery
-- **Error handling** - Error boundaries and recovery
-- **TypeScript support** - Type safety and DX
+### What's Being Tested
+The benchmark suite tests a single comprehensive homepage route (`/`) that includes:
+- **8 Server Components** - Counter, TestComponent, ShoppingList, WhatsHot, EnvTestComponent, FetchExample, ServerWithClient, and Markdown
+- **Static rendering** - All components rendered server-side
+- **Real-world complexity** - Mix of simple and complex components with various rendering patterns
 
-## Structure
-
-```
-benchmarks/
-├── README.md                 # This file - benchmark overview
-├── shared/                   # Shared test data and utilities
-│   ├── components/          # Common components for both frameworks
-│   ├── data/               # Test datasets and API responses
-│   └── utils/              # Benchmark utilities and helpers
-├── rari-app/               # Rari test application
-│   ├── src/
-│   │   ├── app/            # App Router structure
-│   │   ├── components/
-│   │   └── actions/
-│   ├── package.json
-│   └── vite.config.ts
-├── nextjs-app/             # Next.js equivalent application
-│   ├── src/
-│   │   ├── components/
-│   │   ├── app/            # App Router structure
-│   │   └── lib/
-│   ├── package.json
-│   └── next.config.js
-├── scripts/                # Benchmark execution scripts
-│   ├── performance.js      # Performance measurement suite
-│   ├── load-test.js       # Concurrent load testing
-│   ├── build-times.js     # Build performance comparison
-│   └── memory-usage.js    # Memory profiling
-└── results/               # Benchmark results and reports
-    ├── latest.json        # Most recent benchmark results
-    └── history/          # Historical benchmark data
-```
 
 ## Quick Start
 
 ### Prerequisites
 - Node.js 22+
-- pnpm (recommended)
-- Rust (for Rari development builds)
+- pnpm (install with `corepack enable`)
+- Rust and Cargo
+- **just** - Command runner (install with `cargo install just`)
 
 ### Setup
 ```bash
-# Install dependencies for both apps
-cd benchmarks/rari-app && pnpm install
-cd ../nextjs-app && pnpm install
+# One-command setup (installs all dependencies and tools)
+just setup
 
-# Install benchmark scripts dependencies
-cd .. && pnpm install
+# Or complete initialization (setup + build + compile)
+just init
 ```
 
 ### Run Benchmarks
 ```bash
-# From benchmarks/ directory
+# Build both apps for production
+just build
 
-# Run complete benchmark suite (development mode)
-pnpm run benchmark:all:dev
-
-# Run complete benchmark suite (production mode)
-pnpm run benchmark:all:prod
+# Run complete benchmark suite
+just benchmark-all
 
 # Run specific benchmarks
-pnpm run benchmark:dev      # Server performance (dev mode)
-pnpm run benchmark:prod     # Server performance (prod mode)
-pnpm run loadtest:dev       # Load testing (dev mode)
-pnpm run loadtest:prod      # Load testing (prod mode)
-pnpm run buildtest          # Build times comparison
+just buildtest                 # Build times comparison
+just benchmark                 # Server performance (requires servers running)
+just loadtest                  # Load testing (requires servers running)
+
+# Quick tests with oha
+just quick-test-rari           # Test Rari with default settings
+just quick-test-nextjs         # Test Next.js with default settings
 ```
 
 ## Test Scenarios
 
-### 1. Server Component Rendering
-- **Simple components** - Basic text and props
-- **Data fetching components** - API calls and database queries
-- **Complex layouts** - Nested components with multiple data sources
-- **Markdown processing** - Server-side content transformation
-- **Image optimization** - Server-side image processing
+### 1. Performance Benchmark
+Tests server-side rendering performance with sequential requests:
+- **Warmup phase** - 50 requests to warm up the server
+- **Test phase** - 20 measured requests
+- **Metrics collected** - Min, max, avg, P50, P95, P99 response times, response size, error rate
 
-### 2. Routing Performance
-- **Static routes** - Simple page navigation
-- **Dynamic routes** - Parameterized paths ([id], [slug])
-- **Nested routes** - Multi-level route hierarchies
-- **Catch-all routes** - [...slug] patterns
-- **Route transitions** - Client-side navigation speed
+### 2. Load Test
+Tests concurrent request handling using `oha`:
+- **Duration** - 30 seconds (configurable)
+- **Concurrent connections** - 50 (configurable)
+- **Metrics collected** - Throughput (req/sec), latency percentiles, error rates, timeouts
 
-### 3. Concurrent Load Testing
-- **1-10 concurrent users** - Light load
-- **50-100 concurrent users** - Medium load
-- **200+ concurrent users** - Heavy load
-- **Stress testing** - Resource exhaustion scenarios
-
-### 4. Real-world Scenarios
-- **Blog application** - Static content with dynamic routing
-- **E-commerce catalog** - Product listings with search/filter
-- **Dashboard** - Real-time data with charts and tables
-- **Content management** - CRUD operations with server validation
+### 3. Build Time Test
+Compares production build performance:
+- **Build command** - `pnpm run build` for both frameworks
+- **Metrics collected** - Build duration, bundle size, chunk count, warnings, errors
 
 ## Metrics Collection
 
-### Performance Metrics
-- **Response time** - P50, P95, P99 percentiles
-- **Throughput** - Requests per second
-- **Error rate** - Failed request percentage
-- **Resource usage** - CPU, memory, network
+### Performance Benchmark Metrics
+- **Response times** - Min, max, avg, P50, P95, P99 (in milliseconds)
+- **Response size** - Average payload size in bytes
+- **Success rate** - Percentage of successful requests
+- **Error count** - Number of failed requests
 
-### Development Experience
-- **Build times** - Development and production builds
-- **Hot reload speed** - Time for changes to reflect
-- **Bundle analysis** - JavaScript payload sizes
-- **TypeScript compilation** - Type checking performance
+### Load Test Metrics
+- **Throughput** - Requests per second (avg, min, max)
+- **Latency** - Response time percentiles (P50, P90, P95, P99) in milliseconds
+- **Errors** - Failed requests and timeouts
+- **Duration** - Total test duration
 
-### Quality Metrics
-- **First Contentful Paint (FCP)**
-- **Largest Contentful Paint (LCP)**
-- **Cumulative Layout Shift (CLS)**
-- **Time to Interactive (TTI)**
+### Build Metrics
+- **Build time** - Total production build duration
+- **Bundle size** - Total size of client-side JavaScript and CSS
+- **Chunk count** - Number of generated files
+- **Warnings/Errors** - Build output analysis
 
 ## Configuration
 
 Both applications are configured to be as equivalent as possible:
 
-### Rari App Features
-- App Router with file-based routing and dynamic routes
-- Server components by default with data fetching
-- Client components for interactivity ('use client')
-- Server actions for mutations ('use server')
+### Shared Features
+- App Router with file-based routing
+- Single homepage route (`/`) with 8 server components
+- Server components by default
 - TypeScript throughout
 - Tailwind CSS for styling
-- Error boundaries and loading states
+- Identical component implementations
 
-### Next.js App Features
-- App Router with equivalent route structure
-- Server Components and Client Components
-- Server Actions for mutations
-- Same data fetching patterns
-- Identical TypeScript configuration
-- Same Tailwind CSS setup
-- Equivalent error handling
+### rari App
+- Rust-powered React Server Components runtime
+- Vite-based build system
+- Production server on port 3000
+
+### Next.js App
+- Node.js-based React framework
+- Turbopack build system
+- Production server on port 3001
 
 ## Actual Results
 
-Based on our benchmarks, Rari delivers:
+Based on the latest benchmark run (2026-01-15):
 
-### Performance Advantages
-- **3.8x faster** response times (0.69ms vs 2.58ms avg)
-- **10.5x higher** throughput (20,226 vs 1,934 req/sec)
-- **12x faster** P99 latency under load (4ms vs 48ms)
-- **68% smaller** client bundles (27.6 KB vs 85.9 KB)
-- **5.6x faster** builds (1.64s vs 9.11s)
+### Performance Benchmark
+- **rari average response time**: 1.32ms
+- **Next.js average response time**: 2.63ms
+- **rari is 49.7% faster** in response time
+- **rari bundle size**: ~28KB
+- **Next.js bundle size**: ~82KB
+- **rari bundles are 65.7% smaller**
+
+### Build Performance
+- **rari build time**: ~1.6s
+- **Next.js build time**: ~9.1s
+- **rari builds 5.6x faster**
+
+### Load Test Performance
+- **rari throughput**: Higher requests/sec under concurrent load
+- **rari P95 latency**: Lower latency under stress
+- **Both frameworks**: 100% success rate in standard testing
 
 ### Trade-offs
-- **Ecosystem maturity** - Next.js has broader ecosystem
-- **Development tooling** - Next.js has more mature dev tools
-- **Community support** - Next.js has larger community
+- **Ecosystem maturity** - Next.js has broader ecosystem and more third-party integrations
+- **Development tooling** - Next.js has more mature dev tools and debugging support
+- **Community support** - Next.js has larger community and more resources
 - **Production stability** - Next.js has longer production track record
 
 ## Running Individual Tests
 
+### Starting Servers
+```bash
+# Start Rari production server (port 3000)
+just start-rari
+
+# Start Next.js production server (port 3001)
+just start-nextjs
+
+# Check if servers are running
+just check-servers
+```
+
 ### Performance Testing
 ```bash
-# From benchmarks/ directory
-
-# Development mode (apps will be started automatically)
-pnpm run benchmark:dev
-
-# Production mode (apps will be built and started automatically)
-pnpm run benchmark:prod
+# Run performance benchmark (requires servers to be running)
+just benchmark
 ```
 
 ### Load Testing
 ```bash
-# From benchmarks/ directory
+# Run load test (requires servers to be running)
+just loadtest
 
-# Development mode
-pnpm run loadtest:dev
-
-# Production mode (recommended for accurate results)
-pnpm run loadtest:prod
+# Quick load tests with custom parameters
+just quick-test-rari 30s 100      # 30 seconds, 100 connections
+just quick-test-nextjs 30s 100
 ```
 
 ### Build Time Testing
 ```bash
-# From benchmarks/ directory
-pnpm run buildtest
+# Run build time comparison
+just buildtest
+```
+
+### Viewing Results
+```bash
+# View latest results
+just results
+
+# View specific result types
+just results-build    # Build time results
+just results-perf     # Performance results
+just results-load     # Load test results
+```
+
+### Development Commands
+```bash
+# Clean build artifacts
+just clean
+
+# Clean and rebuild
+just rebuild
+
+# Format and check code
+just fmt
+just check
+
+# Compile benchmark tools
+just compile
+```
+
+## Available Commands
+
+Run `just` to see all available commands, or `just --list` for a detailed list.
+
+### Common Workflows
+
+**First-time setup:**
+```bash
+just init  # Setup dependencies, build apps, compile tools
+```
+
+**Running benchmarks:**
+```bash
+# 1. Build the apps
+just build
+
+# 2. Start servers (in separate terminals)
+just start-rari
+just start-nextjs
+
+# 3. Run benchmarks
+just benchmark-all
+```
+
+**Quick iteration:**
+```bash
+just rebuild          # Clean and rebuild
+just buildtest        # Test build times
+just check-servers    # Verify servers are running
 ```
 
 ## Contributing
@@ -211,11 +252,11 @@ pnpm run buildtest
 When adding new benchmark scenarios:
 
 1. **Ensure parity** - Both apps should have equivalent functionality
-2. **Document metrics** - Clearly define what's being measured
-3. **Reproducible tests** - Include setup and teardown procedures
-4. **Realistic scenarios** - Test real-world usage patterns
-5. **Update documentation** - Keep README and scripts current
+2. **Update both apps** - Add components/routes to both rari-app and nextjs-app
+3. **Update benchmark tools** - Modify the Rust benchmark tools in `tools/benchmark/src/`
+4. **Document changes** - Update this README with new test scenarios
+5. **Run all tests** - Verify with `just benchmark-all`
 
 ## License
 
-This benchmark suite is part of the Rari project and follows the same MIT license.
+This benchmark suite is part of the rari project and follows the same MIT license.
