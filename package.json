@@ -3,5 +3,18 @@
   "type": "module",
   "version": "0.1.0",
   "private": true,
-  "description": "Performance benchmarks for rari vs Next.js comparison"
+  "description": "Performance benchmarks for rari vs Next.js comparison",
+  "scripts": {
+    "lint": "pnpm -r run lint && oxlint && eslint .",
+    "lint:fix": "pnpm -r run lint:fix && oxlint --fix && eslint . --fix"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:eslint",
+    "@eslint-react/eslint-plugin": "catalog:eslint",
+    "eslint": "catalog:eslint",
+    "eslint-plugin-oxlint": "catalog:eslint",
+    "eslint-plugin-react-hooks": "catalog:eslint",
+    "eslint-plugin-react-refresh": "catalog:eslint",
+    "oxlint": "catalog:"
+  }
 }

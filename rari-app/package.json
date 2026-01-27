@@ -9,7 +9,9 @@
   "scripts": {
     "build": "rari build",
     "dev": "rari dev",
-    "start": "rari start"
+    "start": "rari start",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix"
   },
   "dependencies": {
     "markdown-it": "catalog:md",
@@ -24,6 +26,7 @@
     "@types/react": "catalog:react",
     "@types/react-dom": "catalog:react",
     "@typescript/native-preview": "catalog:",
+    "oxlint": "catalog:",
     "rolldown-vite": "catalog:build",
     "tailwindcss": "catalog:tailwind"
   }

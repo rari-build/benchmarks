@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "NODE_ENV=production next build",
-    "start": "PORT=3001 next start"
+    "start": "PORT=3001 next start",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix"
   },
   "dependencies": {
     "@types/markdown-it": "catalog:md",
@@ -19,6 +21,7 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:react",
     "@types/react-dom": "catalog:react",
+    "oxlint": "catalog:",
     "tailwindcss": "catalog:tailwind",
     "typescript": "catalog:"
   }
