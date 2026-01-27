@@ -58,13 +58,13 @@ just build
 just benchmark-all
 
 # Run specific benchmarks
-just buildtest                 # Build times comparison
-just benchmark                 # Server performance (requires servers running)
-just loadtest                  # Load testing (requires servers running)
+just buildtest
+just benchmark
+just loadtest
 
 # Quick tests with oha
-just quick-test-rari           # Test Rari with default settings
-just quick-test-nextjs         # Test Next.js with default settings
+just quick-test-rari
+just quick-test-nextjs
 ```
 
 ## Test Scenarios
@@ -133,30 +133,30 @@ Both applications are configured to be as equivalent as possible:
 Based on the latest benchmark run (January 26, 2026):
 
 ### Build Performance
-- **rari build time**: 1.41s
-- **Next.js build time**: 4.10s
-- **rari builds 65.6% faster**
-- **rari client bundle**: 266.04 KB (2 files)
-- **Next.js client bundle**: 564.84 KB (8 files)
+
+| Metric | rari | Next.js | Improvement |
+|--------|------|---------|-------------|
+| Build Time | 1.41s | 4.10s | 65.6% faster |
+| Client Bundle | 266.04 KB (2 files) | 564.84 KB (8 files) | 52.9% smaller |
 
 ### Performance Benchmark
-- **rari average response time**: 0.35ms
-- **Next.js average response time**: 2.64ms
-- **rari is 86.6% faster** in response time
-- **rari P95 latency**: 0.38ms
-- **Next.js P95 latency**: 3.44ms
-- **rari response size**: 33,389 bytes
-- **Next.js response size**: 84,317 bytes
+
+| Metric | rari | Next.js | Improvement |
+|--------|------|---------|-------------|
+| Average Response Time | 0.35ms | 2.64ms | 86.6% faster |
+| P95 Latency | 0.38ms | 3.44ms | 89.0% faster |
+| Response Size | 33,389 bytes | 84,317 bytes | 60.4% smaller |
 
 ### Load Test Performance (30s duration, 50 concurrent connections)
-- **rari throughput**: 14,085.06 req/sec
-- **Next.js throughput**: 1,624.41 req/sec
-- **rari handles 767.1% more requests/sec**
-- **rari average latency**: 3.55ms (P95: 5.78ms)
-- **Next.js average latency**: 30.79ms (P95: 38.43ms)
-- **rari is 88.5% faster** under load
-- **Total requests**: rari: 422,604 | Next.js: 48,736
-- **Both frameworks**: 0 errors, 0 timeouts (100% success rate)
+
+| Metric | rari | Next.js | Improvement |
+|--------|------|---------|-------------|
+| Throughput | 14,085.06 req/sec | 1,624.41 req/sec | 767.1% higher |
+| Average Latency | 3.55ms | 30.79ms | 88.5% faster |
+| P95 Latency | 5.78ms | 38.43ms | 84.9% faster |
+| Total Requests | 422,604 | 48,736 | 767.1% more |
+| Errors | 0 | 0 | 100% success rate |
+| Timeouts | 0 | 0 | 100% success rate |
 
 ## Running Individual Tests
 
@@ -184,7 +184,7 @@ just benchmark
 just loadtest
 
 # Quick load tests with custom parameters
-just quick-test-rari 30s 100      # 30 seconds, 100 connections
+just quick-test-rari 30s 100
 just quick-test-nextjs 30s 100
 ```
 
@@ -200,9 +200,9 @@ just buildtest
 just results
 
 # View specific result types
-just results-build    # Build time results
-just results-perf     # Performance results
-just results-load     # Load test results
+just results-build
+just results-perf
+just results-load
 ```
 
 ### Development Commands
@@ -229,7 +229,7 @@ Run `just` to see all available commands, or `just --list` for a detailed list.
 
 **First-time setup:**
 ```bash
-just init  # Setup dependencies, build apps, compile tools
+just init
 ```
 
 **Running benchmarks:**
@@ -247,9 +247,9 @@ just benchmark-all
 
 **Quick iteration:**
 ```bash
-just rebuild          # Clean and rebuild
-just buildtest        # Test build times
-just check-servers    # Verify servers are running
+just rebuild
+just buildtest
+just check-servers
 ```
 
 ## Contributing
@@ -264,4 +264,4 @@ When adding new benchmark scenarios:
 
 ## License
 
-This benchmark suite is part of the rari project and follows the same MIT license.
+MIT License - see [LICENSE](LICENSE) for details.
