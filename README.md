@@ -8,6 +8,10 @@
 
 > Runtime Accelerated Rendering Infrastructure
 
+[![npm version](https://img.shields.io/npm/v/rari.svg)](https://www.npmjs.com/package/rari)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Discord](https://img.shields.io/badge/chat-discord-blue?style=flat&logo=discord)](https://discord.gg/GSh2Ak3b8Q)
+
 # rari vs Next.js Benchmark Suite
 
 This benchmark suite provides a comprehensive comparison between **rari** (Rust-powered React Server Components) and **Next.js** (Node.js-based React framework).
