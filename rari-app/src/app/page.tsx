@@ -1,11 +1,11 @@
-import Counter from '../components/Counter'
-import EnvTestComponent from '../components/EnvTestComponent'
-import FetchExample from '../components/FetchExample'
-import Markdown from '../components/Markdown'
-import ServerWithClient from '../components/ServerWithClient'
-import ShoppingList from '../components/ShoppingList'
-import TestComponent from '../components/TestComponent'
-import WhatsHot from '../components/WhatsHot'
+import Counter from '@/components/Counter'
+import EnvTestComponent from '@/components/EnvTestComponent'
+import FetchExample from '@/components/FetchExample'
+import Markdown from '@/components/Markdown'
+import ServerWithClient from '@/components/ServerWithClient'
+import ShoppingList from '@/components/ShoppingList'
+import TestComponent from '@/components/TestComponent'
+import WhatsHot from '@/components/WhatsHot'
 
 export default function HomePage() {
   return (
