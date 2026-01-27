@@ -1,7 +1,7 @@
 import type { LayoutProps } from 'rari'
 
 export default function RootLayout({ children }: LayoutProps) {
-  return <div>{children}</div>
+  return <>{children}</>
 }
 
 export const metadata = {
