@@ -6,7 +6,8 @@
   "description": "Shared components and utilities for benchmark apps",
   "exports": {
     "./components/*": "./src/components/*.tsx",
-    "./functions": "./src/functions/index.ts"
+    "./functions": "./src/functions/index.ts",
+    "./content/*": "./content/*"
   },
   "dependencies": {
     "markdown-it": "catalog:md",
