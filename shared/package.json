@@ -22,6 +22,7 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:react",
     "oxlint": "catalog:",
+    "tailwindcss": "catalog:tailwind",
     "typescript": "catalog:"
   }
 }

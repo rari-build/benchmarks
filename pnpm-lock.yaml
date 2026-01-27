@@ -203,6 +203,9 @@ importers:
       oxlint:
         specifier: 'catalog:'
         version: 1.42.0
+      tailwindcss:
+        specifier: catalog:tailwind
+        version: 4.1.18
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
