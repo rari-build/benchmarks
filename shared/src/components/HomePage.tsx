@@ -137,6 +137,7 @@ export default function HomePage({ framework }: HomePageProps) {
               <br />
               <span className="text-sm text-gray-500">
                 Powered by
+                {' '}
                 {framework.poweredBy}
               </span>
             </p>

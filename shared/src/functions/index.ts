@@ -1,7 +1,3 @@
-/**
- * Get the list of grocery items
- * @returns {Promise<Array<{id: number, text: string, completed: boolean}>>} Array of grocery items
- */
 export async function getTodosList() {
   const groceries = [
     { id: 1, text: '🥛 Buy milk', completed: true },
@@ -19,12 +15,6 @@ export async function getTodosList() {
   return groceries
 }
 
-/**
- * Add two numbers on the server
- * @param {number} a
- * @param {number} b
- * @returns {Promise<number>} Sum of the two numbers
- */
 export async function add(a: number, b: number): Promise<number> {
   const numA = Number(a)
   const numB = Number(b)

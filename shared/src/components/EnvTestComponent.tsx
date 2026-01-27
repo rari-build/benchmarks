@@ -1,6 +1,6 @@
 import process from 'node:process'
 
-function EnvTestComponent() {
+export default function EnvTestComponent() {
   const nodeEnv = process?.env?.NODE_ENV
   const serverPort = process?.env?.SERVER_PORT
   const customVar = process?.env?.CUSTOM_TEST_VAR
@@ -62,5 +62,3 @@ function EnvTestComponent() {
     </div>
   )
 }
-
-export default EnvTestComponent

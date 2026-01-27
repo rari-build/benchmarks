@@ -25,7 +25,7 @@ interface BlueskyFeedResponse {
   cursor?: string
 }
 
-async function WhatsHot() {
+export default async function WhatsHot() {
   try {
     const response = await fetch(
       'https://public.api.bsky.app/xrpc/app.bsky.feed.getFeed?feed=at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.feed.generator/whats-hot&limit=10',
@@ -155,5 +155,3 @@ async function WhatsHot() {
     )
   }
 }
-
-export default WhatsHot
