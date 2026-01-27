@@ -1,11 +1,11 @@
-import Counter from '../components/Counter'
-import EnvTestComponent from '../components/EnvTestComponent'
-import FetchExample from '../components/FetchExample'
-import Markdown from '../components/Markdown'
-import ServerWithClient from '../components/ServerWithClient'
-import ShoppingList from '../components/ShoppingList'
-import TestComponent from '../components/TestComponent'
-import WhatsHot from '../components/WhatsHot'
+import Counter from '@benchmark/shared/components/Counter'
+import EnvTestComponent from '@benchmark/shared/components/EnvTestComponent'
+import FetchExample from '@benchmark/shared/components/FetchExample'
+import Markdown from '@benchmark/shared/components/Markdown'
+import ServerWithClient from '@benchmark/shared/components/ServerWithClient'
+import ShoppingList from '@benchmark/shared/components/ShoppingList'
+import TestComponent from '@benchmark/shared/components/TestComponent'
+import WhatsHot from '@benchmark/shared/components/WhatsHot'
 
 export const revalidate = false
 

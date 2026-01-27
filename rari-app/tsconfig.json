@@ -8,7 +8,8 @@
     "moduleResolution": "bundler",
     "paths": {
       "*": ["./*"],
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@benchmark/shared": ["../shared/src"]
     },
     "resolveJsonModule": true,
     "allowImportingTsExtensions": true,

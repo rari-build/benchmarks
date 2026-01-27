@@ -107,6 +107,9 @@ importers:
 
   nextjs-app:
     dependencies:
+      '@benchmark/shared':
+        specifier: workspace:*
+        version: link:../shared
       '@types/markdown-it':
         specifier: catalog:md
         version: 14.1.2
@@ -147,6 +150,9 @@ importers:
 
   rari-app:
     dependencies:
+      '@benchmark/shared':
+        specifier: workspace:*
+        version: link:../shared
       markdown-it:
         specifier: catalog:md
         version: 14.1.0
@@ -187,6 +193,34 @@ importers:
       tailwindcss:
         specifier: catalog:tailwind
         version: 4.1.18
+
+  shared:
+    dependencies:
+      markdown-it:
+        specifier: catalog:md
+        version: 14.1.0
+      react:
+        specifier: catalog:react
+        version: 19.2.4
+      react-dom:
+        specifier: catalog:react
+        version: 19.2.4(react@19.2.4)
+    devDependencies:
+      '@types/markdown-it':
+        specifier: catalog:md
+        version: 14.1.2
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.10.9
+      '@types/react':
+        specifier: catalog:react
+        version: 19.2.9
+      '@types/react-dom':
+        specifier: catalog:react
+        version: 19.2.3(@types/react@19.2.9)
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
 
 packages:
 

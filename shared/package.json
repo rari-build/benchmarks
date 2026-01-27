@@ -1,0 +1,23 @@
+{
+  "name": "@benchmark/shared",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared components and utilities for benchmark apps",
+  "exports": {
+    "./components/*": "./src/components/*.tsx",
+    "./functions": "./src/functions/index.ts"
+  },
+  "dependencies": {
+    "markdown-it": "catalog:md",
+    "react": "catalog:react",
+    "react-dom": "catalog:react"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "catalog:md",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:react",
+    "@types/react-dom": "catalog:react",
+    "typescript": "catalog:"
+  }
+}
