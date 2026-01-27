@@ -6,6 +6,7 @@ export default antfu(
   {
     react: true,
     typescript: true,
+    ignores: ['**/next-env.d.ts'],
   },
   {
     files: ['**/src/app/**'],
