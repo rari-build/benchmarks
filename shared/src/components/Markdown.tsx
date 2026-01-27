@@ -17,22 +17,8 @@ export default async function MarkdownTest({
     const contentPath = join(cwd(), 'content', filePath)
     const publicPath = join(cwd(), 'public', 'content', filePath)
 
-    let fullPath: string
-    if (existsSync(sharedDevPath)) {
-      fullPath = sharedDevPath
-    }
-    else if (existsSync(sharedPath)) {
-      fullPath = sharedPath
-    }
-    else if (existsSync(distPath)) {
-      fullPath = distPath
-    }
-    else if (existsSync(contentPath)) {
-      fullPath = contentPath
-    }
-    else {
-      fullPath = publicPath
-    }
+    const paths = [sharedDevPath, sharedPath, distPath, contentPath, publicPath]
+    const fullPath = paths.find(existsSync) || publicPath
     const content = readFileSync(fullPath, 'utf-8')
 
     const md = new MarkdownIt({

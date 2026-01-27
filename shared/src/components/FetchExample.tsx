@@ -6,7 +6,6 @@ export default async function FetchExample() {
   }
 
   const post = await response.json()
-
   const currentTime = new Date().toLocaleTimeString()
 
   return (
