@@ -20,8 +20,8 @@ catalogs:
       specifier: ^1.42.0
       version: 1.42.0
     rari:
-      specifier: ^0.7.12
-      version: 0.7.12
+      specifier: ^0.7.14
+      version: 0.7.14
     typescript:
       specifier: ^5.9.3
       version: 5.9.3
@@ -107,12 +107,9 @@ importers:
 
   nextjs-app:
     dependencies:
-      '@types/markdown-it':
-        specifier: catalog:md
-        version: 14.1.2
-      markdown-it:
-        specifier: catalog:md
-        version: 14.1.0
+      '@benchmark/shared':
+        specifier: workspace:*
+        version: link:../shared
       next:
         specifier: catalog:nextjs
         version: 16.1.5(@babel/core@7.28.6)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -147,12 +144,12 @@ importers:
 
   rari-app:
     dependencies:
-      markdown-it:
-        specifier: catalog:md
-        version: 14.1.0
+      '@benchmark/shared':
+        specifier: workspace:*
+        version: link:../shared
       rari:
         specifier: 'catalog:'
-        version: 0.7.12(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 0.7.14(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react:
         specifier: catalog:react
         version: 19.2.4
@@ -163,9 +160,6 @@ importers:
       '@tailwindcss/vite':
         specifier: catalog:tailwind
         version: 4.1.18(vite@7.2.6(@types/node@24.10.9)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.2))
-      '@types/markdown-it':
-        specifier: catalog:md
-        version: 14.1.2
       '@types/node':
         specifier: 'catalog:'
         version: 24.10.9
@@ -187,6 +181,31 @@ importers:
       tailwindcss:
         specifier: catalog:tailwind
         version: 4.1.18
+
+  shared:
+    dependencies:
+      markdown-it:
+        specifier: catalog:md
+        version: 14.1.0
+      react:
+        specifier: catalog:react
+        version: 19.2.4
+    devDependencies:
+      '@types/markdown-it':
+        specifier: catalog:md
+        version: 14.1.2
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.10.9
+      '@types/react':
+        specifier: catalog:react
+        version: 19.2.9
+      oxlint:
+        specifier: 'catalog:'
+        version: 1.42.0
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
 
 packages:
 
@@ -2646,8 +2665,8 @@ packages:
     os: [win32]
     hasBin: true
 
-  rari@0.7.12:
-    resolution: {integrity: sha512-UZQDe9Wz8wu/3ZTUwI8xPx9EJLRY/xizSOXML/afj8EUcX/8Fls/5uQjQm+m4v7YBU+16KHNmWh6JCN9VX8Csw==}
+  rari@0.7.14:
+    resolution: {integrity: sha512-Q26+wCKnBWsv7YMk2L94xviZsbRysSZh1nnwvP+erH8Yj43bWS37QJnVGA4A/iEc+d44Mlj3I9+rczXieDBVfg==}
     engines: {node: '>=20.0.0'}
     hasBin: true
     peerDependencies:
@@ -5435,7 +5454,7 @@ snapshots:
   rari-win32-x64@0.7.9:
     optional: true
 
-  rari@0.7.12(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
+  rari@0.7.14(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
       esbuild: 0.27.2
       react: 19.2.4

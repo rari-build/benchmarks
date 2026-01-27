@@ -10,8 +10,7 @@
     "lint:fix": "oxlint --fix"
   },
   "dependencies": {
-    "@types/markdown-it": "catalog:md",
-    "markdown-it": "catalog:md",
+    "@benchmark/shared": "workspace:*",
     "next": "catalog:nextjs",
     "react": "catalog:react",
     "react-dom": "catalog:react"

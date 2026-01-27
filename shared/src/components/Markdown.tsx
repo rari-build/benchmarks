@@ -11,12 +11,20 @@ export default async function MarkdownTest({
   filePath = 'demo-article.md',
 }: MarkdownTestProps) {
   try {
+    const sharedPath = join(cwd(), 'node_modules', '@benchmark', 'shared', 'content', filePath)
+    const sharedDevPath = join(cwd(), '..', 'shared', 'content', filePath)
     const distPath = join(cwd(), 'dist', 'content', filePath)
     const contentPath = join(cwd(), 'content', filePath)
     const publicPath = join(cwd(), 'public', 'content', filePath)
 
     let fullPath: string
-    if (existsSync(distPath)) {
+    if (existsSync(sharedDevPath)) {
+      fullPath = sharedDevPath
+    }
+    else if (existsSync(sharedPath)) {
+      fullPath = sharedPath
+    }
+    else if (existsSync(distPath)) {
       fullPath = distPath
     }
     else if (existsSync(contentPath)) {
