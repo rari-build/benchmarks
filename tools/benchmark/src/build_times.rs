@@ -214,7 +214,7 @@ async fn save_results(results: &BenchmarkResults, base_dir: &Path) -> Result<()>
     let date = time_utils::format_date(SystemTime::now());
     let filename = results_dir.join(format!("buildtimes-{}.json", date));
 
-    let json = serde_json::to_string_pretty(results)?;
+    let json = format!("{}\n", serde_json::to_string_pretty(results)?);
     fs::write(&filename, json).await?;
 
     println!(

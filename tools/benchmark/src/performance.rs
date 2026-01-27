@@ -285,7 +285,7 @@ async fn save_results(results: &BenchmarkResults, results_dir: &PathBuf) -> Resu
     let date = time_utils::format_date(now);
     let filename = results_dir.join(format!("performance-{}.json", date));
 
-    let json = serde_json::to_string_pretty(results)?;
+    let json = format!("{}\n", serde_json::to_string_pretty(results)?);
     fs::write(&filename, &json).await?;
 
     let latest = results_dir.join("latest.json");
