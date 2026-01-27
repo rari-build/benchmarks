@@ -11,14 +11,12 @@
   },
   "dependencies": {
     "markdown-it": "catalog:md",
-    "react": "catalog:react",
-    "react-dom": "catalog:react"
+    "react": "catalog:react"
   },
   "devDependencies": {
     "@types/markdown-it": "catalog:md",
     "@types/node": "catalog:",
     "@types/react": "catalog:react",
-    "@types/react-dom": "catalog:react",
     "typescript": "catalog:"
   }
 }

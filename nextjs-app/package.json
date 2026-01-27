@@ -11,8 +11,6 @@
   },
   "dependencies": {
     "@benchmark/shared": "workspace:*",
-    "@types/markdown-it": "catalog:md",
-    "markdown-it": "catalog:md",
     "next": "catalog:nextjs",
     "react": "catalog:react",
     "react-dom": "catalog:react"

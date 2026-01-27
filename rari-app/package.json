@@ -15,14 +15,12 @@
   },
   "dependencies": {
     "@benchmark/shared": "workspace:*",
-    "markdown-it": "catalog:md",
     "rari": "catalog:",
     "react": "catalog:react",
     "react-dom": "catalog:react"
   },
   "devDependencies": {
     "@tailwindcss/vite": "catalog:tailwind",
-    "@types/markdown-it": "catalog:md",
     "@types/node": "catalog:",
     "@types/react": "catalog:react",
     "@types/react-dom": "catalog:react",

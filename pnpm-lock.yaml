@@ -110,12 +110,6 @@ importers:
       '@benchmark/shared':
         specifier: workspace:*
         version: link:../shared
-      '@types/markdown-it':
-        specifier: catalog:md
-        version: 14.1.2
-      markdown-it:
-        specifier: catalog:md
-        version: 14.1.0
       next:
         specifier: catalog:nextjs
         version: 16.1.5(@babel/core@7.28.6)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -153,9 +147,6 @@ importers:
       '@benchmark/shared':
         specifier: workspace:*
         version: link:../shared
-      markdown-it:
-        specifier: catalog:md
-        version: 14.1.0
       rari:
         specifier: 'catalog:'
         version: 0.7.14(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -169,9 +160,6 @@ importers:
       '@tailwindcss/vite':
         specifier: catalog:tailwind
         version: 4.1.18(vite@7.2.6(@types/node@24.10.9)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.2))
-      '@types/markdown-it':
-        specifier: catalog:md
-        version: 14.1.2
       '@types/node':
         specifier: 'catalog:'
         version: 24.10.9
@@ -202,9 +190,6 @@ importers:
       react:
         specifier: catalog:react
         version: 19.2.4
-      react-dom:
-        specifier: catalog:react
-        version: 19.2.4(react@19.2.4)
     devDependencies:
       '@types/markdown-it':
         specifier: catalog:md
@@ -215,9 +200,6 @@ importers:
       '@types/react':
         specifier: catalog:react
         version: 19.2.9
-      '@types/react-dom':
-        specifier: catalog:react
-        version: 19.2.3(@types/react@19.2.9)
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
