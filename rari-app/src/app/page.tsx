@@ -17,8 +17,3 @@ export default function Page() {
     />
   )
 }
-
-export const metadata = {
-  title: 'rari Framework Benchmark',
-  description: 'Server Component Performance Testing Suite',
-}
