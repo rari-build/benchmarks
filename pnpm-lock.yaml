@@ -200,6 +200,9 @@ importers:
       '@types/react':
         specifier: catalog:react
         version: 19.2.9
+      oxlint:
+        specifier: 'catalog:'
+        version: 1.42.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
