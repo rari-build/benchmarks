@@ -1,6 +1,6 @@
 import HomePage from '@benchmark/shared/components/HomePage'
 
-export default function Page() {
+export default function Home() {
   return (
     <HomePage
       framework={{

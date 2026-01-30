@@ -14,7 +14,7 @@
 
 # rari vs Next.js Benchmark Suite
 
-This benchmark suite provides a comprehensive comparison between **rari** (Rust-powered React Server Components) and **Next.js** (Node.js-based React framework).
+This benchmark suite provides a comprehensive comparison between **rari** (Rust-powered React Server Components) and **Next.js**.
 
 ## Benchmark Objectives
 
