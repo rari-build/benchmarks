@@ -3,7 +3,6 @@ shellEmulator: true
 trustPolicy: no-downgrade
 trustPolicyExclude:
   - semver@6.3.1
-
 packages:
   - nextjs-app
   - rari-app
@@ -13,15 +12,15 @@ catalogs:
     rolldown-vite: ^7.3.1
   default:
     '@types/node': ^24.10.9
-    '@typescript/native-preview': ^7.0.0-dev.20260201.1
-    oxlint: ^1.42.0
-    rari: ^0.8.7
+    '@typescript/native-preview': ^7.0.0-dev.20260202.1
+    oxlint: ^1.43.0
+    rari: ^0.8.10
     typescript: ^5.9.3
   eslint:
     '@antfu/eslint-config': ^7.2.0
-    '@eslint-react/eslint-plugin': ^2.8.4
+    '@eslint-react/eslint-plugin': ^2.9.3
     eslint: ^9.39.2
-    eslint-plugin-oxlint: ^1.42.0
+    eslint-plugin-oxlint: ^1.43.0
     eslint-plugin-react-hooks: ^7.0.1
     eslint-plugin-react-refresh: ^0.5.0
   md:
