@@ -11,14 +11,14 @@ catalogs:
   build:
     rolldown-vite: ^7.3.1
   default:
-    '@types/node': ^24.10.9
-    '@typescript/native-preview': ^7.0.0-dev.20260202.1
+    '@types/node': ^24.10.10
+    '@typescript/native-preview': ^7.0.0-dev.20260204.1
     oxlint: ^1.43.0
-    rari: ^0.8.10
+    rari: ^0.8.12
     typescript: ^5.9.3
   eslint:
     '@antfu/eslint-config': ^7.2.0
-    '@eslint-react/eslint-plugin': ^2.9.3
+    '@eslint-react/eslint-plugin': ^2.9.4
     eslint: ^9.39.2
     eslint-plugin-oxlint: ^1.43.0
     eslint-plugin-react-hooks: ^7.0.1
@@ -29,7 +29,7 @@ catalogs:
   nextjs:
     next: ^16.1.6
   react:
-    '@types/react': ^19.2.10
+    '@types/react': ^19.2.11
     '@types/react-dom': ^19.2.3
     react: ^19.2.4
     react-dom: ^19.2.4
