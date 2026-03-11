@@ -9,12 +9,12 @@ packages:
   - shared
 catalogs:
   build:
-    rolldown-vite: ^7.3.1
+    vite: ^8.0.0-beta.18
   default:
-    '@types/node': ^25.3.5
-    '@typescript/native-preview': ^7.0.0-dev.20260307.1
-    oxlint: ^1.51.0
-    rari: ^0.10.13
+    '@types/node': ^25.4.0
+    '@typescript/native-preview': ^7.0.0-dev.20260311.1
+    oxlint: ^1.53.0
+    rari: ^0.10.15
     typescript: ^5.9.3
   eslint:
     '@antfu/eslint-config': ^7.7.0
