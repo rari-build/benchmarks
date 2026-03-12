@@ -1,8 +1,6 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "plugins": [
-    "node",
-    "jsdoc",
     "import",
     "unicorn"
   ],
@@ -51,7 +49,8 @@
     "**/LICENSE*",
     "**/__snapshots__",
     "**/auto-import?(s).d.ts",
-    "**/components.d.ts"
+    "**/components.d.ts",
+    "**/next-env.d.ts"
   ],
   "rules": {
     "accessor-pairs": [
@@ -131,6 +130,7 @@
     ],
     "no-lone-blocks": "error",
     "no-loss-of-precision": "error",
+    "no-misleading-character-class": "error",
     "no-multi-str": "error",
     "no-new": "error",
     "no-new-func": "error",
@@ -170,13 +170,16 @@
     "no-template-curly-in-string": "error",
     "no-this-before-super": "error",
     "no-throw-literal": "error",
+    "no-undef": "error",
     "no-unexpected-multiline": "error",
+    "no-unmodified-loop-condition": "error",
     "no-unneeded-ternary": [
       "error",
       {
         "defaultAssignment": false
       }
     ],
+    "no-unreachable": "error",
     "no-unsafe-finally": "error",
     "no-unsafe-negation": "error",
     "no-unused-expressions": [
@@ -196,6 +199,14 @@
         "vars": "all"
       }
     ],
+    "no-use-before-define": [
+      "error",
+      {
+        "classes": false,
+        "functions": false,
+        "variables": true
+      }
+    ],
     "no-useless-call": "error",
     "no-useless-catch": "error",
     "no-useless-computed-key": "error",
@@ -204,6 +215,13 @@
     "no-useless-return": "error",
     "no-var": "error",
     "no-with": "error",
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "all",
+        "ignoreReadBeforeAssign": true
+      }
+    ],
     "prefer-exponentiation-operator": "error",
     "prefer-promise-reject-errors": "error",
     "prefer-rest-params": "error",
@@ -232,18 +250,6 @@
       "error",
       "never"
     ],
-    "node/no-exports-assign": "error",
-    "node/no-new-require": "error",
-    "jsdoc/check-access": "warn",
-    "jsdoc/check-property-names": "warn",
-    "jsdoc/empty-tags": "warn",
-    "jsdoc/implements-on-classes": "warn",
-    "jsdoc/no-defaults": "warn",
-    "jsdoc/require-param-name": "warn",
-    "jsdoc/require-property": "warn",
-    "jsdoc/require-property-description": "warn",
-    "jsdoc/require-property-name": "warn",
-    "jsdoc/require-returns-description": "warn",
     "import/consistent-type-specifier-style": [
       "error",
       "prefer-top-level"
@@ -271,11 +277,36 @@
   "overrides": [
     {
       "files": [
+        "**/*.?([cm])[jt]s?(x)"
+      ],
+      "rules": {
+        "node/no-exports-assign": "error",
+        "node/no-new-require": "error",
+        "node/no-path-concat": "error",
+        "jsdoc/check-access": "warn",
+        "jsdoc/check-property-names": "warn",
+        "jsdoc/empty-tags": "warn",
+        "jsdoc/implements-on-classes": "warn",
+        "jsdoc/no-defaults": "warn",
+        "jsdoc/require-param-name": "warn",
+        "jsdoc/require-property": "warn",
+        "jsdoc/require-property-description": "warn",
+        "jsdoc/require-property-name": "warn",
+        "jsdoc/require-returns-description": "warn"
+      },
+      "plugins": [
+        "node",
+        "jsdoc"
+      ]
+    },
+    {
+      "files": [
         "**/*.?([cm])ts",
         "**/*.?([cm])tsx"
       ],
       "rules": {
         "constructor-super": "off",
+        "getter-return": "off",
         "no-class-assign": "off",
         "no-const-assign": "off",
         "no-dupe-keys": "off",
@@ -291,8 +322,17 @@
         ],
         "no-setter-return": "off",
         "no-this-before-super": "off",
+        "no-undef": "off",
+        "no-unreachable": "off",
         "no-unsafe-negation": "off",
         "no-with": "off",
+        "prefer-const": [
+          "error",
+          {
+            "destructuring": "all",
+            "ignoreReadBeforeAssign": true
+          }
+        ],
         "@typescript-eslint/ban-ts-comment": [
           "error",
           {
@@ -310,6 +350,7 @@
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-extra-non-null-assertion": "error",
         "@typescript-eslint/no-extraneous-class": "off",
+        "@typescript-eslint/no-invalid-void-type": "off",
         "@typescript-eslint/no-misused-new": "error",
         "@typescript-eslint/no-namespace": "error",
         "@typescript-eslint/no-non-null-asserted-nullish-coalescing": "error",
@@ -335,6 +376,15 @@
         "@typescript-eslint/prefer-literal-enum-member": "error",
         "@typescript-eslint/prefer-namespace-keyword": "error",
         "@typescript-eslint/triple-slash-reference": "off",
+        "@typescript-eslint/unified-signatures": "off",
+        "no-use-before-define": [
+          "error",
+          {
+            "classes": false,
+            "functions": false,
+            "variables": true
+          }
+        ],
         "@typescript-eslint/consistent-type-definitions": [
           "error",
           "interface"
@@ -348,13 +398,7 @@
           }
         ],
         "@typescript-eslint/no-import-type-side-effects": "error"
-      }
-    },
-    {
-      "files": [
-        "**/*.?([cm])ts",
-        "**/*.?([cm])tsx"
-      ],
+      },
       "plugins": [
         "typescript"
       ]
@@ -395,6 +439,7 @@
         "react/jsx-no-comment-textnodes": "warn",
         "react/jsx-no-duplicate-props": "warn",
         "react/no-array-index-key": "warn",
+        "react/no-clone-element": "warn",
         "react/no-direct-mutation-state": "error",
         "react/no-redundant-should-component-update": "error",
         "react/no-string-refs": "error",
@@ -414,6 +459,27 @@
     },
     {
       "files": [
+        "**/*.?([cm])ts",
+        "**/*.?([cm])tsx"
+      ],
+      "rules": {
+        "react/jsx-no-duplicate-props": "off",
+        "react/jsx-no-undef": "off"
+      },
+      "plugins": [
+        "react"
+      ]
+    },
+    {
+      "files": [
+        "**/*.md"
+      ],
+      "rules": {
+        "no-irregular-whitespace": "off"
+      }
+    },
+    {
+      "files": [
         "**/*.md/**/*.?([cm])[jt]s?(x)"
       ],
       "rules": {
@@ -421,6 +487,7 @@
         "no-console": "off",
         "no-labels": "off",
         "no-lone-blocks": "off",
+        "no-undef": "off",
         "no-unused-expressions": "off",
         "no-unused-labels": "off",
         "no-unused-vars": "off",
@@ -429,7 +496,8 @@
         "@typescript-eslint/no-namespace": "off",
         "@typescript-eslint/no-require-imports": "off",
         "unicode-bom": "off",
-        "no-redeclare": "off"
+        "no-redeclare": "off",
+        "no-use-before-define": "off"
       },
       "plugins": [
         "typescript"
