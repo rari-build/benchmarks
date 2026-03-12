@@ -257,7 +257,7 @@ just check-servers
 When adding new benchmark scenarios:
 
 1. **Ensure parity** - Both apps should have equivalent functionality
-2. **Update both apps** - Add components/routes to both rari-app and nextjs-app
+2. **Update both apps** - Add components/routes to both rari and nextjs
 3. **Update benchmark tools** - Modify the Rust benchmark tools in `tools/benchmark/src/`
 4. **Document changes** - Update this README with new test scenarios
 5. **Run all tests** - Verify with `just benchmark-all`

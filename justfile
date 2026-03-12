@@ -28,11 +28,11 @@ build: build-rari build-nextjs
 
 # Build rari app
 build-rari:
-    cd rari-app && pnpm run build
+    cd apps/rari && pnpm run build
 
 # Build Next.js app
 build-nextjs:
-    cd nextjs-app && pnpm run build
+    cd apps/nextjs && pnpm run build
 
 # Compile benchmark tools
 compile:
@@ -46,11 +46,11 @@ buildtest:
 
 # Start rari production server (port 3000)
 start-rari:
-    cd rari-app && pnpm run start
+    cd apps/rari && pnpm run start
 
 # Start Next.js production server (port 3001)
 start-nextjs:
-    cd nextjs-app && pnpm run start
+    cd apps/nextjs && pnpm run start
 
 # Check if servers are running
 check-servers:
@@ -111,8 +111,8 @@ results-load:
 
 # Clean build artifacts
 clean:
-    rm -rf rari-app/dist
-    rm -rf nextjs-app/.next
+    rm -rf apps/rari/dist
+    rm -rf apps/nextjs/.next
     rm -rf target
 
 # Clean and rebuild everything

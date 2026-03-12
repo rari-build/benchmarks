@@ -246,8 +246,8 @@ async fn main() -> Result<()> {
     println!("{}", "Starting build comparison in 3 seconds...".dimmed());
     tokio::time::sleep(tokio::time::Duration::from_secs(3)).await;
 
-    let rari_dir = args.dir.join("rari-app");
-    let nextjs_dir = args.dir.join("nextjs-app");
+    let rari_dir = args.dir.join("apps/rari");
+    let nextjs_dir = args.dir.join("apps/nextjs");
 
     let rari_result = run_build("rari", &rari_dir, "pnpm run build").await?;
     let nextjs_result = run_build("Next.js", &nextjs_dir, "pnpm run build").await?;

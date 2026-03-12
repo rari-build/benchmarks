@@ -9,7 +9,7 @@
     "paths": {
       "*": ["./*"],
       "@/*": ["./src/*"],
-      "@benchmark/shared": ["../shared/src"]
+      "@benchmark/shared": ["../../shared/src"]
     },
     "resolveJsonModule": true,
     "allowImportingTsExtensions": true,

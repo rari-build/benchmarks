@@ -322,13 +322,13 @@ async fn main() -> Result<()> {
 
     if let Err(e) = check_server("rari", args.rari_port).await {
         eprintln!("{} {}", "❌".red(), e);
-        eprintln!("Please start the rari server with: cd rari-app && pnpm dev");
+        eprintln!("Please start the rari server with: cd apps/rari && pnpm dev");
         std::process::exit(1);
     }
 
     if let Err(e) = check_server("Next.js", args.nextjs_port).await {
         eprintln!("{} {}", "❌".red(), e);
-        eprintln!("Please start the Next.js server with: cd nextjs-app && pnpm dev");
+        eprintln!("Please start the Next.js server with: cd apps/nextjs && pnpm dev");
         std::process::exit(1);
     }
 
