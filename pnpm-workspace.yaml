@@ -14,7 +14,7 @@ catalogs:
     '@types/node': ^25.5.0
     '@typescript/native-preview': ^7.0.0-dev.20260324.1
     oxlint: ^1.57.0
-    rari: ^0.10.23
+    rari: ^0.10.24
     typescript: ^5.9.3
   eslint:
     '@antfu/eslint-config': ^7.7.3

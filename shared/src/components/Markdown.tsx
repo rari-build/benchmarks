@@ -11,15 +11,15 @@ export default async function MarkdownTest({
   filePath = 'demo-article.md',
 }: MarkdownTestProps) {
   try {
-    const sharedPath = join(cwd(), 'node_modules', '@benchmark', 'shared', 'content', filePath)
-    const sharedDevPath = join(cwd(), '..', 'shared', 'content', filePath)
-    const distPath = join(cwd(), 'dist', 'content', filePath)
-    const contentPath = join(cwd(), 'content', filePath)
-    const publicPath = join(cwd(), 'public', 'content', filePath)
+    const sharedPath = join(/* turbopackIgnore: true */ cwd(), 'node_modules', '@benchmark', 'shared', 'content', filePath)
+    const sharedDevPath = join(/* turbopackIgnore: true */ cwd(), '..', 'shared', 'content', filePath)
+    const distPath = join(/* turbopackIgnore: true */ cwd(), 'dist', 'content', filePath)
+    const contentPath = join(/* turbopackIgnore: true */ cwd(), 'content', filePath)
+    const publicPath = join(/* turbopackIgnore: true */ cwd(), 'public', 'content', filePath)
 
     const paths = [sharedDevPath, sharedPath, distPath, contentPath, publicPath]
-    const fullPath = paths.find(existsSync) || publicPath
-    const content = readFileSync(fullPath, 'utf-8')
+    const fullPath = paths.find(p => existsSync(/* turbopackIgnore: true */ p)) || publicPath
+    const content = readFileSync(/* turbopackIgnore: true */ fullPath, 'utf-8')
 
     const md = new MarkdownIt({
       html: true,

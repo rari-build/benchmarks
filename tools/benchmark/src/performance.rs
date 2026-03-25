@@ -99,7 +99,6 @@ async fn measure_request(url: &str, warmup: usize, requests: usize) -> Result<Pe
 
     for _ in 0..warmup {
         let _ = client.get(url).send().await;
-        tokio::time::sleep(Duration::from_millis(10)).await;
     }
 
     let mut times = Vec::new();
@@ -123,8 +122,6 @@ async fn measure_request(url: &str, warmup: usize, requests: usize) -> Result<Pe
             }
             _ => errors += 1,
         }
-
-        tokio::time::sleep(Duration::from_millis(10)).await;
     }
 
     if times.is_empty() {
