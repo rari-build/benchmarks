@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-03-26T19:49:24Z",
+  "rari": {
+    "success": true,
+    "duration_ms": 1264.51475,
+    "bundle_size": "280.66 kB",
+    "chunk_count": 6,
+    "warnings": 0,
+    "errors": 0
+  },
+  "nextjs": {
+    "success": true,
+    "duration_ms": 3694.289459,
+    "bundle_size": "633.51 kB",
+    "chunk_count": 8,
+    "warnings": 0,
+    "errors": 0
+  }
+}
