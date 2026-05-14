@@ -93,6 +93,11 @@ async fn check_server(name: &str, port: u16) -> Result<()> {
 async fn measure_request(url: &str, warmup: usize, requests: usize) -> Result<PerformanceMetrics> {
     let client = reqwest::Client::builder()
         .timeout(Duration::from_secs(10))
+        .default_headers({
+            let mut headers = reqwest::header::HeaderMap::new();
+            headers.insert("accept-encoding", "zstd, br, gzip".parse().unwrap());
+            headers
+        })
         .build()?;
 
     println!("  Testing {}...", url);

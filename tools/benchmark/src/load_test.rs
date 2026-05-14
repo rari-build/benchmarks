@@ -147,6 +147,8 @@ async fn run_load_test(
         .arg(format!("{}s", duration))
         .arg("-c")
         .arg(connections.to_string())
+        .arg("-H")
+        .arg("Accept-Encoding: zstd, br, gzip")
         .arg("--no-tui")
         .arg("--output-format")
         .arg("json")
