@@ -10,6 +10,7 @@ interface MarkdownTestProps {
 export default async function MarkdownTest({
   filePath = 'demo-article.md',
 }: MarkdownTestProps) {
+  // eslint-disable-next-line react/error-boundaries
   try {
     const sharedPath = join(/* turbopackIgnore: true */ cwd(), 'node_modules', '@benchmark', 'shared', 'content', filePath)
     const sharedDevPath = join(/* turbopackIgnore: true */ cwd(), '..', 'shared', 'content', filePath)
@@ -76,7 +77,7 @@ export default async function MarkdownTest({
         </style>
         <div
           className="markdown-content"
-          // eslint-disable-next-line react-dom/no-dangerously-set-innerhtml
+          // eslint-disable-next-line react/dom-no-dangerously-set-innerhtml
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>

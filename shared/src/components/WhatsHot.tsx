@@ -26,7 +26,9 @@ interface BlueskyFeedResponse {
 }
 
 export default async function WhatsHot() {
+  // eslint-disable-next-line react/error-boundaries
   try {
+    // eslint-disable-next-line react/purity
     const response = await fetch(
       'https://public.api.bsky.app/xrpc/app.bsky.feed.getFeed?feed=at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.feed.generator/whats-hot&limit=10',
       {
@@ -41,6 +43,7 @@ export default async function WhatsHot() {
     }
 
     const data: BlueskyFeedResponse = await response.json()
+    // eslint-disable-next-line react/purity
     const currentTime = new Date().toLocaleTimeString()
 
     return (

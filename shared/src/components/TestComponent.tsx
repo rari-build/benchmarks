@@ -32,6 +32,7 @@ export default async function TestComponent({
         <small className="block mt-2 text-xs text-gray-500">
           Rendered at:
           {' '}
+          {/* eslint-disable-next-line react/purity */}
           {new Date().toLocaleTimeString()}
         </small>
       </div>

@@ -1,4 +1,5 @@
 export default async function FetchExample() {
+  // eslint-disable-next-line react/purity
   const response = await fetch('https://jsonplaceholder.typicode.com/posts/1')
 
   if (!response.ok) {
@@ -6,6 +7,7 @@ export default async function FetchExample() {
   }
 
   const post = await response.json()
+  // eslint-disable-next-line react/purity
   const currentTime = new Date().toLocaleTimeString()
 
   return (

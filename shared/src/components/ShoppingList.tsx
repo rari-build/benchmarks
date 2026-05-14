@@ -2,6 +2,7 @@ import { getTodosList } from '../functions'
 
 export default async function ShoppingList() {
   const groceries = await getTodosList()
+  // eslint-disable-next-line react/purity
   const timestamp = new Date().toLocaleTimeString()
 
   function renderGroceryItem(item: any) {

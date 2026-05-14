@@ -56,6 +56,7 @@ export default function EnvTestComponent() {
         <div className="text-xs text-gray-500 mt-4">
           Rendered at:
           {' '}
+          {/* eslint-disable-next-line react/purity */}
           {new Date().toISOString()}
         </div>
       </div>
