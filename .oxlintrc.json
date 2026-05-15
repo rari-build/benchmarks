@@ -54,7 +54,8 @@
     "**/.claude",
     "**/.agents",
     "**/.*/skills",
-    "**/next-env.d.ts"
+    "**/next-env.d.ts",
+    "**/*.md"
   ],
   "rules": {
     "accessor-pairs": [
@@ -161,6 +162,29 @@
         "name": "self"
       }
     ],
+    "no-restricted-properties": [
+      "error",
+      {
+        "message": "Use `Object.getPrototypeOf` or `Object.setPrototypeOf` instead.",
+        "property": "__proto__"
+      },
+      {
+        "message": "Use `Object.defineProperty` instead.",
+        "property": "__defineGetter__"
+      },
+      {
+        "message": "Use `Object.defineProperty` instead.",
+        "property": "__defineSetter__"
+      },
+      {
+        "message": "Use `Object.getOwnPropertyDescriptor` instead.",
+        "property": "__lookupGetter__"
+      },
+      {
+        "message": "Use `Object.getOwnPropertyDescriptor` instead.",
+        "property": "__lookupSetter__"
+      }
+    ],
     "no-self-assign": [
       "error",
       {
@@ -236,6 +260,12 @@
     ],
     "prefer-exponentiation-operator": "error",
     "prefer-promise-reject-errors": "error",
+    "prefer-regex-literals": [
+      "error",
+      {
+        "disallowRedundantWrapping": true
+      }
+    ],
     "prefer-rest-params": "error",
     "prefer-spread": "error",
     "prefer-template": "error",
@@ -453,12 +483,11 @@
       ],
       "rules": {
         "react/exhaustive-deps": "warn",
-        "react/jsx-no-comment-textnodes": "warn",
         "react/no-array-index-key": "warn",
         "react/no-clone-element": "warn",
         "react/no-direct-mutation-state": "error",
-        "react/no-redundant-should-component-update": "error",
         "react/rules-of-hooks": "error",
+        "react/jsx-no-comment-textnodes": "warn",
         "react/only-export-components": [
           "error",
           {
@@ -470,14 +499,6 @@
       "plugins": [
         "react"
       ]
-    },
-    {
-      "files": [
-        "**/*.md"
-      ],
-      "rules": {
-        "no-irregular-whitespace": "off"
-      }
     },
     {
       "files": [
