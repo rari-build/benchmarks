@@ -123,6 +123,7 @@
     "no-fallthrough": "error",
     "no-func-assign": "error",
     "no-global-assign": "error",
+    "no-implied-eval": "error",
     "no-import-assign": "error",
     "no-irregular-whitespace": "error",
     "no-iterator": "error",
@@ -251,6 +252,13 @@
         "ignoreConstructors": false
       }
     ],
+    "prefer-arrow-callback": [
+      "error",
+      {
+        "allowNamedFunctions": false,
+        "allowUnboundThis": true
+      }
+    ],
     "prefer-const": [
       "error",
       {
@@ -300,6 +308,12 @@
     "import/no-duplicates": "error",
     "import/no-mutable-exports": "error",
     "import/no-named-default": "error",
+    "import/newline-after-import": [
+      "error",
+      {
+        "count": 1
+      }
+    ],
     "unicorn/consistent-empty-array-spread": "error",
     "unicorn/error-message": "error",
     "unicorn/escape-case": "error",

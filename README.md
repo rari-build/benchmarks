@@ -130,31 +130,31 @@ Both applications are configured to be as equivalent as possible:
 
 ## Actual Results
 
-Based on the latest benchmark run (May 15, 2026):
+Based on the latest benchmark run (May 25, 2026) (rari v0.13.11):
 
 ### Build Performance
 
 | Metric | rari | Next.js | Improvement |
 |--------|------|---------|-------------|
-| Build Time | 1.98s | 4.42s | 55.2% faster |
+| Build Time | 1.75s | 4.42s | 60.5% faster |
 | Client Bundle | 285.15 KB (6 files) | 634.29 KB (8 files) | 55.0% smaller |
 
 ### Performance Benchmark
 
 | Metric | rari | Next.js | Improvement |
 |--------|------|---------|-------------|
-| Average Response Time | 0.13ms | 1.98ms | 93.5% faster |
-| P95 Latency | 0.18ms | 2.46ms | 92.7% faster |
-| Response Size | 13,089 bytes | 33,058 bytes | 60.4% smaller |
+| Average Response Time | 0.12ms | 2.17ms | 94.6% faster |
+| P95 Latency | 0.16ms | 2.37ms | 93.2% faster |
+| Response Size | 24,471 bytes | 33,247 bytes | 26.4% smaller |
 
 ### Load Test Performance (30s duration, 50 concurrent connections)
 
 | Metric | rari | Next.js | Improvement |
 |--------|------|---------|-------------|
-| Throughput | 105,698.12 req/sec | 1,462.85 req/sec | 7,125.5% higher |
-| Average Latency | 0.47ms | 34.19ms | 98.6% faster |
-| P95 Latency | 0.80ms | 42.84ms | 98.1% faster |
-| Total Requests | 3,171,807 | 43,891 | 7,125.5% more |
+| Throughput | 97,825.93 req/sec | 1,451.84 req/sec | 6,638.0% higher |
+| Average Latency | 0.51ms | 34.46ms | 98.5% faster |
+| P95 Latency | 0.82ms | 43.41ms | 98.1% faster |
+| Total Requests | 2,935,293 | 43,559 | 6,638.0% more |
 | Errors | 0 | 0 | 100% success rate |
 | Timeouts | 0 | 0 | 100% success rate |
 
