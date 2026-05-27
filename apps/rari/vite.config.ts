@@ -5,14 +5,7 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [
-    rari({
-      rateLimit: {
-        enabled: false,
-      },
-      spamBlocker: {
-        enabled: false,
-      },
-    }),
+    rari(),
     tailwindcss(),
   ],
   resolve: {
