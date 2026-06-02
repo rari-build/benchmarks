@@ -457,6 +457,10 @@
             "prefer": "type-imports"
           }
         ],
+        "typescript/method-signature-style": [
+          "error",
+          "property"
+        ],
         "typescript/no-import-type-side-effects": "error"
       },
       "plugins": [
