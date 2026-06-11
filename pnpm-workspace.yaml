@@ -1,12 +1,12 @@
 catalogMode: prefer
 minimumReleaseAgeExclude:
-  - rari-darwin-arm64@0.14.8
-  - rari-darwin-x64@0.14.8
-  - rari-linux-arm64@0.14.8
-  - rari-linux-x64@0.14.8
-  - rari-win32-arm64@0.14.8
-  - rari-win32-x64@0.14.8
-  - rari@0.14.8
+  - rari-darwin-arm64@0.14.9
+  - rari-darwin-x64@0.14.9
+  - rari-linux-arm64@0.14.9
+  - rari-linux-x64@0.14.9
+  - rari-win32-arm64@0.14.9
+  - rari-win32-x64@0.14.9
+  - rari@0.14.9
 shellEmulator: true
 trustPolicy: no-downgrade
 trustPolicyExclude:
@@ -20,21 +20,21 @@ catalogs:
     vite: ^8.0.16
   default:
     '@types/node': ^25.9.2
-    '@typescript/native-preview': ^7.0.0-dev.20260606.1
-    oxlint: ^1.68.0
-    rari: ^0.14.8
-    typescript: ^5.9.3
+    '@typescript/native-preview': ^7.0.0-dev.20260610.1
+    oxlint: ^1.69.0
+    rari: ^0.14.9
+    typescript: ^6.0.3
   eslint:
     '@antfu/eslint-config': ^9.0.0
-    '@eslint-react/eslint-plugin': ^5.8.13
+    '@eslint-react/eslint-plugin': ^5.8.17
     eslint: ^10.4.1
-    eslint-plugin-oxlint: ^1.68.0
+    eslint-plugin-oxlint: ^1.69.0
     eslint-plugin-react-refresh: ^0.5.2
   md:
     '@types/markdown-it': ^14.1.2
     markdown-it: ^14.2.0
   nextjs:
-    next: ^16.2.7
+    next: ^16.2.9
   react:
     '@types/react': ^19.2.17
     '@types/react-dom': ^19.2.3
