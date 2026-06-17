@@ -2,7 +2,7 @@
   "name": "rari-nextjs-benchmarks",
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@11.5.3",
+  "packageManager": "pnpm@11.7.0",
   "description": "Performance benchmarks for rari vs Next.js comparison",
   "scripts": {
     "lint": "pnpm -r run lint && oxlint && eslint .",
