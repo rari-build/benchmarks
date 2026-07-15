@@ -21,12 +21,12 @@
   },
   "devDependencies": {
     "@tailwindcss/vite": "catalog:tailwind",
-    "@types/node": "catalog:",
+    "@types/node": "catalog:typescript",
     "@types/react": "catalog:react",
     "@types/react-dom": "catalog:react",
-    "@typescript/native-preview": "catalog:",
     "oxlint": "catalog:",
     "tailwindcss": "catalog:tailwind",
+    "typescript-7": "catalog:typescript",
     "vite": "catalog:build"
   }
 }

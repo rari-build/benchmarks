@@ -1,4 +1,5 @@
-**/target/
-dist/
-node_modules/
-.next/
+**/target
+dist
+node_modules
+.next
+.pnpm-store

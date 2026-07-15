@@ -17,11 +17,11 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "catalog:tailwind",
-    "@types/node": "catalog:",
+    "@types/node": "catalog:typescript",
     "@types/react": "catalog:react",
     "@types/react-dom": "catalog:react",
     "oxlint": "catalog:",
     "tailwindcss": "catalog:tailwind",
-    "typescript": "catalog:"
+    "typescript": "catalog:typescript"
   }
 }
