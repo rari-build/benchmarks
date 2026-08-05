@@ -56,6 +56,8 @@ start-nextjs:
 check-servers:
     @curl -s http://localhost:3000 > /dev/null && echo "✅ rari is running on port 3000" || echo "❌ rari is not running on port 3000"
     @curl -s http://localhost:3001 > /dev/null && echo "✅ Next.js is running on port 3001" || echo "❌ Next.js is not running on port 3001"
+    @curl -s http://localhost:3000/stream > /dev/null && echo "✅ rari /stream is available" || echo "❌ rari /stream is not available"
+    @curl -s http://localhost:3001/stream > /dev/null && echo "✅ Next.js /stream is available" || echo "❌ Next.js /stream is not available"
 
 # --- Quick test commands ---
 
@@ -67,11 +69,20 @@ benchmark:
 loadtest:
     cargo run --manifest-path ./tools/benchmark/Cargo.toml --release --bin load-test
 
+# Run streaming Suspense benchmark on /stream (requires servers to be running)
+streamtest:
+    cargo run --manifest-path ./tools/benchmark/Cargo.toml --release --bin streaming
+
+# Profile streaming chunks only (no oha throughput)
+streamtest-profile:
+    cargo run --manifest-path ./tools/benchmark/Cargo.toml --release --bin streaming -- --profile-only
+
 # Run all benchmarks (requires servers to be running)
 benchmark-all:
     just buildtest
     just benchmark
     just loadtest
+    just streamtest
 
 # --- Server commands ---
 
@@ -106,6 +117,14 @@ results-perf:
 # View load test results
 results-load:
     @ls -t results/loadtest-*.json | head -1 | xargs cat | jq .
+
+# View streaming results
+results-stream:
+    @if [ -f results/streaming-latest.json ]; then \
+        cat results/streaming-latest.json | jq .; \
+    else \
+        ls -t results/streaming-*.json 2>/dev/null | head -1 | xargs cat | jq . || echo "No streaming results found."; \
+    fi
 
 # --- Clean commands ---
 

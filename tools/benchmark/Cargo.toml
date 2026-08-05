@@ -17,15 +17,20 @@ path = "src/load_test.rs"
 name = "performance"
 path = "src/performance.rs"
 
+[[bin]]
+name = "streaming"
+path = "src/streaming.rs"
+
 [dependencies]
-tokio = { version = "1.52.3", features = [
+tokio = { version = "1.53.1", features = [
   "full",
   "process"
 ] }
-anyhow = "1.0.102"
-clap = { version = "4.6.1", features = [ "derive" ] }
+anyhow = "1.0.104"
+clap = { version = "4.6.5", features = [ "derive" ] }
 colored = "3.1.1"
-serde = { version = "1.0.228", features = [ "derive" ] }
-serde_json = "1.0.150"
-reqwest = { version = "0.13.4", features = [ "json" ] }
+futures-util = "0.3.33"
+serde = { version = "1.0.229", features = [ "derive" ] }
+serde_json = "1.0.151"
+reqwest = { version = "0.13.4", features = [ "json", "stream" ] }
 tabled = "0.21.0"

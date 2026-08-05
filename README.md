@@ -21,16 +21,16 @@ This benchmark suite provides a comprehensive comparison between **rari** (Rust-
 ### Performance Metrics
 - **Server-side rendering speed** - Time to render all components on server
 - **Time to First Byte (TTFB)** - Server response latency (P50, P95, P99)
+- **Streaming delivery** - Progressive Suspense chunks on `/stream`
 - **Bundle size comparison** - Client-side JavaScript payload
 - **Build times** - Production build speeds
 - **Concurrent request handling** - Throughput under load (requests/sec)
 - **Memory usage** - Runtime memory consumption under load
 
 ### What's Being Tested
-The benchmark suite tests a single comprehensive homepage route (`/`) that includes:
-- **8 Server Components** - Counter, TestComponent, ShoppingList, WhatsHot, EnvTestComponent, FetchExample, ServerWithClient, and Markdown
-- **Static rendering** - All components rendered server-side
-- **Real-world complexity** - Mix of simple and complex components with various rendering patterns
+The benchmark suite tests:
+- **Homepage (`/`)** — 8 Server Components rendered statically (Counter, TestComponent, ShoppingList, WhatsHot, EnvTestComponent, FetchExample, ServerWithClient, Markdown)
+- **Streaming (`/stream`)** — 10 Suspense boundaries with clustered delays for progressive RSC delivery
 
 ## Quick Start
 
@@ -61,6 +61,7 @@ just benchmark-all
 just buildtest
 just benchmark
 just loadtest
+just streamtest
 
 # Quick tests with oha
 just quick-test-rari
@@ -75,13 +76,31 @@ Tests server-side rendering performance with sequential requests:
 - **Test phase** - 20 measured requests
 - **Metrics collected** - Min, max, avg, P50, P95, P99 response times, response size, error rate
 
-### 2. Load Test
+### 2. Streaming Suspense Benchmark
+Standalone test for progressive RSC streaming on `/stream` (inspired by [rari-vs-nextjs](https://github.com/jarick/rari-vs-nextjs)):
+- **Route** - 10 `<Suspense>` boundaries with delays 100ms×5, 500ms×3, 1000ms×2
+- **rari** - `loading.tsx` enables streaming mode
+- **Next.js** - `force-dynamic` + Suspense
+- **Per-chunk profile** - TTFB, first resolved card, last byte, inter-chunk gaps, progressive resolved cards
+- **Throughput** - lighter load via `oha` (25 connections, 15s) because Suspense adds async backpressure
+- **Primary metrics** - TTFB, first content, and throughput (last-byte is dominated by the 1000ms cards)
+- **Notes** - Requests use `Accept-Encoding: identity` so compression doesn't merge flushes; "HTTP frames" are client-observed body frames, not React Suspense boundaries
+
+```bash
+# Full streaming benchmark (profile + throughput)
+just streamtest
+
+# Chunk timing only
+just streamtest-profile
+```
+
+### 3. Load Test
 Tests concurrent request handling using `oha`:
 - **Duration** - 30 seconds (configurable)
 - **Concurrent connections** - 50 (configurable)
 - **Metrics collected** - Throughput (req/sec), latency percentiles, error rates, timeouts
 
-### 3. Build Time Test
+### 4. Build Time Test
 Compares production build performance:
 - **Build command** - `pnpm run build` for both frameworks
 - **Metrics collected** - Build duration, bundle size, chunk count, warnings, errors
@@ -93,6 +112,16 @@ Compares production build performance:
 - **Response size** - Average payload size in bytes
 - **Success rate** - Percentage of successful requests
 - **Error count** - Number of failed requests
+
+### Streaming Benchmark Metrics
+- **TTFB** - Time to first byte / first chunk
+- **First content** - When the first resolved Suspense card marker (`data-bench-stream="resolved"`) appears
+- **Resolved cards** - Count of resolved cards in the response (expected: 10)
+- **Progressive resolved** - Cards resolved by 500ms / 1s / 2s / 5s
+- **Last byte** - Time to complete the streamed response (delay-dominated)
+- **HTTP frames** - Client-observed body frames (not Suspense boundaries)
+- **Inter-chunk gaps** - mean / p50 / p95 / max between frames
+- **Throughput** - req/s under light concurrent load on `/stream`
 
 ### Load Test Metrics
 - **Throughput** - Requests per second (avg, min, max)
@@ -112,7 +141,8 @@ Both applications are configured to be as equivalent as possible:
 
 ### Shared Features
 - App Router with file-based routing
-- Single homepage route (`/`) with 8 server components
+- Homepage route (`/`) with 8 server components
+- Streaming route (`/stream`) with identical Suspense trees
 - Server components by default
 - TypeScript throughout
 - Tailwind CSS for styling
@@ -188,6 +218,15 @@ just quick-test-rari 30s 100
 just quick-test-nextjs 30s 100
 ```
 
+### Streaming Testing
+```bash
+# Per-chunk profile + throughput on /stream
+just streamtest
+
+# Profile only (no oha)
+just streamtest-profile
+```
+
 ### Build Time Testing
 ```bash
 # Run build time comparison
@@ -203,6 +242,7 @@ just results
 just results-build
 just results-perf
 just results-load
+just results-stream
 ```
 
 ### Development Commands
