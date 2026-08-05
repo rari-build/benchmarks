@@ -1,9 +1,8 @@
-mod time_utils;
-
 use anyhow::{Context, Result};
 use clap::Parser;
 use colored::Colorize;
 use futures_util::StreamExt;
+use rari_benchmark::{latest, time_utils};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::path::PathBuf;
@@ -83,7 +82,10 @@ struct ProgressiveResolved {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 struct StreamProfile {
     ttfb_ms: f64,
-    #[serde(rename = "firstContentChunk_ms")]
+    #[serde(
+        rename = "firstContentChunk_ms",
+        skip_serializing_if = "Option::is_none"
+    )]
     first_content_chunk_ms: Option<f64>,
     #[serde(rename = "lastByte_ms")]
     last_byte_ms: f64,
@@ -113,12 +115,14 @@ struct ThroughputStats {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 struct FrameworkStreamingResult {
-    target: String,
     path: String,
     runs: usize,
     successful: usize,
+    #[serde(skip_serializing_if = "Option::is_none")]
     profile: Option<StreamProfile>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     throughput: Option<ThroughputStats>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     error: Option<String>,
 }
 
@@ -128,6 +132,7 @@ struct StreamingBenchmarkResults {
     config: StreamingConfig,
     rari: FrameworkStreamingResult,
     nextjs: FrameworkStreamingResult,
+    #[serde(skip_serializing_if = "Option::is_none")]
     comparison: Option<StreamingComparison>,
 }
 
@@ -146,7 +151,7 @@ struct StreamingComparison {
     ttfb_ratio: f64,
     #[serde(rename = "lastByte_ratio")]
     last_byte_ratio: f64,
-    #[serde(rename = "throughput_ratio")]
+    #[serde(rename = "throughput_ratio", skip_serializing_if = "Option::is_none")]
     throughput_ratio: Option<f64>,
 }
 
@@ -303,18 +308,18 @@ async fn profile_once(client: &reqwest::Client, url: &str) -> Result<StreamProfi
     };
 
     Ok(StreamProfile {
-        ttfb_ms: ttfb,
-        first_content_chunk_ms: first_content,
-        last_byte_ms: last_byte,
+        ttfb_ms: time_utils::round_ms(ttfb),
+        first_content_chunk_ms: first_content.map(time_utils::round_ms),
+        last_byte_ms: time_utils::round_ms(last_byte),
         chunks: chunks.len(),
         resolved_cards,
         inter_chunk_gap_ms: InterChunkGaps {
-            mean: (gap_mean * 100.0).round() / 100.0,
-            p50: percentile(&gaps, 0.50),
-            p95: percentile(&gaps, 0.95),
-            max: gaps.last().copied().unwrap_or(0.0),
+            mean: time_utils::round_2(gap_mean),
+            p50: time_utils::round_ms(percentile(&gaps, 0.50)),
+            p95: time_utils::round_ms(percentile(&gaps, 0.95)),
+            max: time_utils::round_ms(gaps.last().copied().unwrap_or(0.0)),
         },
-        skeleton_duration_ms: last_byte - ttfb,
+        skeleton_duration_ms: time_utils::round_ms(last_byte - ttfb),
         progressive_bytes: ProgressiveBytes {
             at_500ms: progressive_bytes(500.0),
             at_1000ms: progressive_bytes(1000.0),
@@ -332,7 +337,9 @@ async fn profile_once(client: &reqwest::Client, url: &str) -> Result<StreamProfi
 
 fn aggregate_profiles(profiles: &[StreamProfile]) -> StreamProfile {
     StreamProfile {
-        ttfb_ms: median_f64(&profiles.iter().map(|p| p.ttfb_ms).collect::<Vec<_>>()),
+        ttfb_ms: time_utils::round_ms(median_f64(
+            &profiles.iter().map(|p| p.ttfb_ms).collect::<Vec<_>>(),
+        )),
         first_content_chunk_ms: {
             let values: Vec<f64> = profiles
                 .iter()
@@ -341,10 +348,12 @@ fn aggregate_profiles(profiles: &[StreamProfile]) -> StreamProfile {
             if values.is_empty() {
                 None
             } else {
-                Some(median_f64(&values))
+                Some(time_utils::round_ms(median_f64(&values)))
             }
         },
-        last_byte_ms: median_f64(&profiles.iter().map(|p| p.last_byte_ms).collect::<Vec<_>>()),
+        last_byte_ms: time_utils::round_ms(median_f64(
+            &profiles.iter().map(|p| p.last_byte_ms).collect::<Vec<_>>(),
+        )),
         chunks: median_usize(&profiles.iter().map(|p| p.chunks).collect::<Vec<_>>()),
         resolved_cards: median_usize(
             &profiles
@@ -353,39 +362,37 @@ fn aggregate_profiles(profiles: &[StreamProfile]) -> StreamProfile {
                 .collect::<Vec<_>>(),
         ),
         inter_chunk_gap_ms: InterChunkGaps {
-            mean: (median_f64(
+            mean: time_utils::round_2(median_f64(
                 &profiles
                     .iter()
                     .map(|p| p.inter_chunk_gap_ms.mean)
                     .collect::<Vec<_>>(),
-            ) * 100.0)
-                .round()
-                / 100.0,
-            p50: median_f64(
+            )),
+            p50: time_utils::round_ms(median_f64(
                 &profiles
                     .iter()
                     .map(|p| p.inter_chunk_gap_ms.p50)
                     .collect::<Vec<_>>(),
-            ),
-            p95: median_f64(
+            )),
+            p95: time_utils::round_ms(median_f64(
                 &profiles
                     .iter()
                     .map(|p| p.inter_chunk_gap_ms.p95)
                     .collect::<Vec<_>>(),
-            ),
-            max: median_f64(
+            )),
+            max: time_utils::round_ms(median_f64(
                 &profiles
                     .iter()
                     .map(|p| p.inter_chunk_gap_ms.max)
                     .collect::<Vec<_>>(),
-            ),
+            )),
         },
-        skeleton_duration_ms: median_f64(
+        skeleton_duration_ms: time_utils::round_ms(median_f64(
             &profiles
                 .iter()
                 .map(|p| p.skeleton_duration_ms)
                 .collect::<Vec<_>>(),
-        ),
+        )),
         progressive_bytes: ProgressiveBytes {
             at_500ms: median_f64(
                 &profiles
@@ -458,7 +465,6 @@ async fn profile_target(
         Ok(c) => c,
         Err(e) => {
             return FrameworkStreamingResult {
-                target: name.to_string(),
                 path: "/stream".to_string(),
                 runs,
                 successful: 0,
@@ -497,7 +503,6 @@ async fn profile_target(
 
     if profiles.is_empty() {
         return FrameworkStreamingResult {
-            target: name.to_string(),
             path: "/stream".to_string(),
             runs,
             successful: 0,
@@ -508,7 +513,6 @@ async fn profile_target(
     }
 
     FrameworkStreamingResult {
-        target: name.to_string(),
         path: "/stream".to_string(),
         runs,
         successful: profiles.len(),
@@ -574,9 +578,9 @@ async fn measure_throughput(
     );
 
     Ok(ThroughputStats {
-        req_s,
-        latency_avg_ms,
-        latency_p95_ms,
+        req_s: time_utils::round_2(req_s),
+        latency_avg_ms: time_utils::round_ms(latency_avg_ms),
+        latency_p95_ms: time_utils::round_ms(latency_p95_ms),
         errors,
     })
 }
@@ -685,16 +689,16 @@ fn build_comparison(
 
     Some(StreamingComparison {
         ttfb_ratio: if rp.ttfb_ms > 0.0 {
-            np.ttfb_ms / rp.ttfb_ms
+            time_utils::round_2(np.ttfb_ms / rp.ttfb_ms)
         } else {
             0.0
         },
         last_byte_ratio: if rp.last_byte_ms > 0.0 {
-            np.last_byte_ms / rp.last_byte_ms
+            time_utils::round_2(np.last_byte_ms / rp.last_byte_ms)
         } else {
             0.0
         },
-        throughput_ratio,
+        throughput_ratio: throughput_ratio.map(time_utils::round_2),
     })
 }
 
@@ -706,7 +710,46 @@ async fn save_results(results: &StreamingBenchmarkResults, results_dir: &PathBuf
     let json = format!("{}\n", serde_json::to_string_pretty(results)?);
 
     fs::write(&filename, &json).await?;
-    fs::write(results_dir.join("streaming-latest.json"), &json).await?;
+
+    let mut root = latest::read_latest(results_dir).await?;
+    if !root.is_object() {
+        root = serde_json::json!({});
+    }
+
+    let root_obj = root.as_object_mut().expect("latest.json root is an object");
+    for (framework, value) in [
+        ("rari", serde_json::to_value(&results.rari)?),
+        ("nextjs", serde_json::to_value(&results.nextjs)?),
+    ] {
+        let entry = root_obj
+            .entry(framework.to_string())
+            .or_insert_with(|| serde_json::json!({}));
+        entry
+            .as_object_mut()
+            .expect("framework section is an object")
+            .insert("Streaming Suspense".to_string(), value);
+    }
+    root_obj.insert(
+        "timestamp".to_string(),
+        serde_json::Value::String(results.timestamp.clone()),
+    );
+
+    let scenario_count = root_obj
+        .get("rari")
+        .and_then(|v| v.as_object())
+        .map(|m| m.len())
+        .unwrap_or(0);
+    let summary = root_obj
+        .entry("summary".to_string())
+        .or_insert_with(|| serde_json::json!({}));
+    if let Some(summary) = summary.as_object_mut() {
+        summary.insert(
+            "scenarios".to_string(),
+            serde_json::Value::from(scenario_count),
+        );
+    }
+
+    latest::write_latest(results_dir, &root).await?;
 
     println!(
         "\n{} Results saved to {}",
@@ -740,11 +783,11 @@ async fn main() -> Result<()> {
         std::process::exit(1);
     }
 
-    if !args.profile_only {
-        if let Err(e) = check_oha_installed().await {
-            eprintln!("{} {}", "❌".red(), e);
-            std::process::exit(1);
-        }
+    if !args.profile_only
+        && let Err(e) = check_oha_installed().await
+    {
+        eprintln!("{} {}", "❌".red(), e);
+        std::process::exit(1);
     }
 
     let timeout = Duration::from_secs(args.timeout);

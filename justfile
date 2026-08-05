@@ -120,8 +120,8 @@ results-load:
 
 # View streaming results
 results-stream:
-    @if [ -f results/streaming-latest.json ]; then \
-        cat results/streaming-latest.json | jq .; \
+    @if [ -f results/latest.json ] && jq -e '.[ "rari" ][ "Streaming Suspense" ]' results/latest.json >/dev/null 2>&1; then \
+        jq '{timestamp, rari: .rari["Streaming Suspense"], nextjs: .nextjs["Streaming Suspense"]}' results/latest.json; \
     else \
         ls -t results/streaming-*.json 2>/dev/null | head -1 | xargs cat | jq . || echo "No streaming results found."; \
     fi

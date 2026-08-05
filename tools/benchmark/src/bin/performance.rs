@@ -1,8 +1,7 @@
-mod time_utils;
-
 use anyhow::{Context, Result};
 use clap::Parser;
 use colored::Colorize;
+use rari_benchmark::{latest, time_utils};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::path::PathBuf;
@@ -142,12 +141,12 @@ async fn measure_request(url: &str, warmup: usize, requests: usize) -> Result<Pe
     let success_rate = ((requests - errors) as f64 / requests as f64) * 100.0;
 
     Ok(PerformanceMetrics {
-        min: sorted_times[0],
-        max: sorted_times[sorted_times.len() - 1],
-        avg,
-        p50: percentile(&sorted_times, 0.50),
-        p95: percentile(&sorted_times, 0.95),
-        p99: percentile(&sorted_times, 0.99),
+        min: time_utils::round_ms(sorted_times[0]),
+        max: time_utils::round_ms(sorted_times[sorted_times.len() - 1]),
+        avg: time_utils::round_ms(avg),
+        p50: time_utils::round_ms(percentile(&sorted_times, 0.50)),
+        p95: time_utils::round_ms(percentile(&sorted_times, 0.95)),
+        p99: time_utils::round_ms(percentile(&sorted_times, 0.99)),
         avg_size,
         errors,
         success_rate,
@@ -290,8 +289,26 @@ async fn save_results(results: &BenchmarkResults, results_dir: &PathBuf) -> Resu
     let json = format!("{}\n", serde_json::to_string_pretty(results)?);
     fs::write(&filename, &json).await?;
 
-    let latest = results_dir.join("latest.json");
-    fs::write(&latest, &json).await?;
+    let previous = latest::read_latest(results_dir).await?;
+    let mut root = serde_json::to_value(results)?;
+    for framework in ["rari", "nextjs"] {
+        let Some(previous_framework) = previous.get(framework).and_then(|v| v.as_object()) else {
+            continue;
+        };
+        let Some(current) = root
+            .as_object_mut()
+            .and_then(|obj| obj.get_mut(framework))
+            .and_then(|v| v.as_object_mut())
+        else {
+            continue;
+        };
+        for (scenario, value) in previous_framework {
+            current
+                .entry(scenario.clone())
+                .or_insert_with(|| value.clone());
+        }
+    }
+    latest::write_latest(results_dir, &root).await?;
 
     println!(
         "\n{} Results saved to {}",

@@ -5,21 +5,25 @@ edition = { workspace = true }
 license = { workspace = true }
 publish = false
 
+[lib]
+name = "rari_benchmark"
+path = "src/lib.rs"
+
 [[bin]]
 name = "build-times"
-path = "src/build_times.rs"
+path = "src/bin/build_times.rs"
 
 [[bin]]
 name = "load-test"
-path = "src/load_test.rs"
+path = "src/bin/load_test.rs"
 
 [[bin]]
 name = "performance"
-path = "src/performance.rs"
+path = "src/bin/performance.rs"
 
 [[bin]]
 name = "streaming"
-path = "src/streaming.rs"
+path = "src/bin/streaming.rs"
 
 [dependencies]
 tokio = { version = "1.53.1", features = [
@@ -31,6 +35,9 @@ clap = { version = "4.6.5", features = [ "derive" ] }
 colored = "3.1.1"
 futures-util = "0.3.33"
 serde = { version = "1.0.229", features = [ "derive" ] }
-serde_json = "1.0.151"
-reqwest = { version = "0.13.4", features = [ "json", "stream" ] }
+serde_json = { version = "1.0.151", features = [ "preserve_order" ] }
+reqwest = { version = "0.13.4", features = [
+  "json",
+  "stream"
+] }
 tabled = "0.21.0"

@@ -56,7 +56,6 @@ pub fn format_date(time: SystemTime) -> String {
         .to_string()
 }
 
-#[allow(dead_code)]
 pub fn serialize_float_as_int_if_whole<S>(value: &f64, serializer: S) -> Result<S::Ok, S::Error>
 where
     S: serde::Serializer,
@@ -66,4 +65,12 @@ where
     } else {
         serializer.serialize_f64(*value)
     }
+}
+
+pub fn round_ms(value: f64) -> f64 {
+    (value * 1000.0).round() / 1000.0
+}
+
+pub fn round_2(value: f64) -> f64 {
+    (value * 100.0).round() / 100.0
 }

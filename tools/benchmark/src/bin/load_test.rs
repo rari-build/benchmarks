@@ -1,8 +1,7 @@
-mod time_utils;
-
 use anyhow::{Context, Result};
 use clap::Parser;
 use colored::Colorize;
+use rari_benchmark::time_utils;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::path::PathBuf;
