@@ -8,12 +8,14 @@
     "fmt": "vp fmt",
     "fmt:check": "vp fmt --check",
     "lint": "pnpm fmt:check && pnpm -r --filter '!rari-nextjs-benchmarks' run lint && eslint .",
-    "lint:fix": "pnpm fmt && pnpm -r --filter '!rari-nextjs-benchmarks' run lint:fix && eslint . --fix"
+    "lint:fix": "pnpm fmt && pnpm -r --filter '!rari-nextjs-benchmarks' run lint:fix && eslint . --fix",
+    "lint:knip": "knip"
   },
   "devDependencies": {
     "@rari/lint": "catalog:",
     "@types/node": "catalog:typescript",
     "eslint": "catalog:eslint",
+    "knip": "catalog:eslint",
     "typescript": "catalog:typescript",
     "vite-plus": "catalog:build"
   }

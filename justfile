@@ -139,13 +139,20 @@ rebuild: clean build
 
 # --- Development commands ---
 
-# Format code
+# Format Rust code
 fmt:
     cargo fmt --manifest-path ./tools/benchmark/Cargo.toml
 
-# Check code
+# Check Rust code
 check:
     cargo check --manifest-path ./tools/benchmark/Cargo.toml
+    cargo clippy --manifest-path ./tools/benchmark/Cargo.toml
+
+# Run all linters (Node.js + Rust)
+lint:
+    pnpm lint
+    pnpm lint:knip
+    cargo fmt --manifest-path ./tools/benchmark/Cargo.toml --check
     cargo clippy --manifest-path ./tools/benchmark/Cargo.toml
 
 # --- Combined workflow commands ---

@@ -19,7 +19,6 @@
   },
   "devDependencies": {
     "@rari/lint": "catalog:",
-    "@types/markdown-it": "catalog:md",
     "@types/node": "catalog:typescript",
     "@types/react": "catalog:react",
     "tailwindcss": "catalog:tailwind",

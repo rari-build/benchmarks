@@ -1,0 +1,32 @@
+{
+  "$schema": "https://unpkg.com/knip@latest/schema.json",
+  "workspaces": {
+    ".": {
+      "project": [".config/**/*.ts"]
+    },
+    "apps/rari": {
+      "entry": ["src/app/**/*.{ts,tsx}", "index.html"],
+      "project": ["src/**/*.{ts,tsx,css}"],
+      "ignoreDependencies": [
+        "@rari/lint", // Used via root .config/lint imported from vite.config.ts
+        "tailwindcss", // Peer of @tailwindcss/vite
+        "typescript-7" // Side-by-side TypeScript 7 for tooling / IDE
+      ]
+    },
+    "apps/nextjs": {
+      "entry": ["src/app/**/*.{ts,tsx}"],
+      "project": ["src/**/*.{ts,tsx,css}", "*.ts"],
+      "ignoreDependencies": [
+        "@rari/lint", // Used via root .config/lint imported from vite.config.ts
+        "tailwindcss" // Peer of @tailwindcss/postcss
+      ]
+    },
+    "shared": {
+      "entry": ["src/components/**/*.{ts,tsx}"],
+      "project": ["src/**/*.{ts,tsx,css}"],
+      "ignoreDependencies": [
+        "@rari/lint" // Used via root .config/lint imported from vite.config.ts
+      ]
+    }
+  }
+}

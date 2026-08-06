@@ -41,8 +41,8 @@ catalogs:
     rari: ^0.15.8
   eslint:
     eslint: ^10.8.0
+    knip: ^6.31.0
   md:
-    '@types/markdown-it': ^14.1.2
     markdown-it: ^15.0.0
   nextjs:
     next: ^16.3.0
