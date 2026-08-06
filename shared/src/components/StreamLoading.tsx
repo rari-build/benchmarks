@@ -8,9 +8,7 @@ function Skeleton() {
         background: '#f5f5f5',
       }}
     >
-      <div
-        style={{ height: 24, width: '60%', background: '#ddd', borderRadius: 4 }}
-      />
+      <div style={{ height: 24, width: '60%', background: '#ddd', borderRadius: 4 }} />
       <div
         style={{
           height: 16,

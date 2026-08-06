@@ -4,22 +4,34 @@ import { cwd } from 'node:process'
 import MarkdownIt from 'markdown-it'
 
 interface MarkdownTestProps {
-  filePath?: string
+  readonly filePath?: string
 }
 
-export default async function MarkdownTest({
-  filePath = 'demo-article.md',
-}: MarkdownTestProps) {
+export default function MarkdownTest({ filePath = 'demo-article.md' }: MarkdownTestProps) {
   // eslint-disable-next-line react/error-boundaries
   try {
-    const sharedPath = join(/* turbopackIgnore: true */ cwd(), 'node_modules', '@benchmark', 'shared', 'content', filePath)
-    const sharedDevPath = join(/* turbopackIgnore: true */ cwd(), '..', 'shared', 'content', filePath)
+    const sharedPath = join(
+      /* turbopackIgnore: true */ cwd(),
+      'node_modules',
+      '@benchmark',
+      'shared',
+      'content',
+      filePath,
+    )
+    const sharedDevPath = join(
+      /* turbopackIgnore: true */ cwd(),
+      '..',
+      'shared',
+      'content',
+      filePath,
+    )
     const distPath = join(/* turbopackIgnore: true */ cwd(), 'dist', 'content', filePath)
     const contentPath = join(/* turbopackIgnore: true */ cwd(), 'content', filePath)
     const publicPath = join(/* turbopackIgnore: true */ cwd(), 'public', 'content', filePath)
 
     const paths = [sharedDevPath, sharedPath, distPath, contentPath, publicPath]
-    const fullPath = paths.find(p => existsSync(/* turbopackIgnore: true */ p)) || publicPath
+    const foundPath = paths.find(p => existsSync(/* turbopackIgnore: true */ p))
+    const fullPath = foundPath ?? publicPath
     const content = readFileSync(/* turbopackIgnore: true */ fullPath, 'utf-8')
 
     const md = new MarkdownIt({
@@ -38,18 +50,11 @@ export default async function MarkdownTest({
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
               <span className="text-white text-sm font-bold">MD</span>
             </div>
-            <h2 className="text-xl font-bold text-blue-900">
-              Markdown Rendering Demo
-            </h2>
+            <h2 className="text-xl font-bold text-blue-900">Markdown Rendering Demo</h2>
           </div>
           <p className="text-blue-700 text-sm">
-            Server-side markdown processing using
-            {' '}
-            <code className="bg-blue-100 px-1 py-0.5 rounded text-xs">
-              markdown-it
-            </code>
-            {' '}
-            from npm
+            Server-side markdown processing using{' '}
+            <code className="bg-blue-100 px-1 py-0.5 rounded text-xs">markdown-it</code> from npm
           </p>
         </div>
 
@@ -82,17 +87,13 @@ export default async function MarkdownTest({
         />
       </div>
     )
-  }
-  catch (error) {
+  } catch (error) {
     return (
       <div className="max-w-4xl mx-auto p-6">
         <div className="p-6 bg-red-50 border border-red-200 rounded-lg">
-          <h2 className="text-xl font-bold text-red-900 mb-4">
-            Markdown Processing Error
-          </h2>
+          <h2 className="text-xl font-bold text-red-900 mb-4">Markdown Processing Error</h2>
           <p className="text-red-700 mb-3">
-            Error loading markdown file:
-            {' '}
+            Error loading markdown file:{' '}
             <code>
               content/
               {filePath}

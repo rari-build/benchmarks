@@ -1,13 +1,14 @@
 {
   "name": "nextjs-app",
+  "type": "module",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "NODE_ENV=production next build",
     "start": "PORT=3001 next start",
-    "lint": "oxlint",
-    "lint:fix": "oxlint --fix"
+    "lint": "vp lint",
+    "lint:fix": "vp lint --fix"
   },
   "dependencies": {
     "@benchmark/shared": "workspace:*",
@@ -16,12 +17,13 @@
     "react-dom": "catalog:react"
   },
   "devDependencies": {
+    "@rari/lint": "catalog:",
     "@tailwindcss/postcss": "catalog:tailwind",
     "@types/node": "catalog:typescript",
     "@types/react": "catalog:react",
     "@types/react-dom": "catalog:react",
-    "oxlint": "catalog:",
     "tailwindcss": "catalog:tailwind",
-    "typescript": "catalog:typescript"
+    "typescript": "catalog:typescript",
+    "vite-plus": "catalog:build"
   }
 }

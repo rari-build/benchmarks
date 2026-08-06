@@ -5,17 +5,16 @@
   "packageManager": "pnpm@11.20.0",
   "description": "Performance benchmarks for rari vs Next.js comparison",
   "scripts": {
-    "lint": "pnpm -r run lint && oxlint && eslint .",
-    "lint:fix": "pnpm -r run lint:fix && oxlint --fix && eslint . --fix"
+    "fmt": "vp fmt",
+    "fmt:check": "vp fmt --check",
+    "lint": "pnpm fmt:check && pnpm -r --filter '!rari-nextjs-benchmarks' run lint && eslint .",
+    "lint:fix": "pnpm fmt && pnpm -r --filter '!rari-nextjs-benchmarks' run lint:fix && eslint . --fix"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "catalog:eslint",
-    "@eslint-react/eslint-plugin": "catalog:eslint",
+    "@rari/lint": "catalog:",
     "@types/node": "catalog:typescript",
     "eslint": "catalog:eslint",
-    "eslint-plugin-oxlint": "catalog:eslint",
-    "eslint-plugin-react-refresh": "catalog:eslint",
-    "oxlint": "catalog:",
-    "typescript": "catalog:typescript"
+    "typescript": "catalog:typescript",
+    "vite-plus": "catalog:build"
   }
 }

@@ -10,19 +10,20 @@
     "./content/*": "./content/*"
   },
   "scripts": {
-    "lint": "oxlint",
-    "lint:fix": "oxlint --fix"
+    "lint": "vp lint",
+    "lint:fix": "vp lint --fix"
   },
   "dependencies": {
     "markdown-it": "catalog:md",
     "react": "catalog:react"
   },
   "devDependencies": {
+    "@rari/lint": "catalog:",
     "@types/markdown-it": "catalog:md",
     "@types/node": "catalog:typescript",
     "@types/react": "catalog:react",
-    "oxlint": "catalog:",
     "tailwindcss": "catalog:tailwind",
-    "typescript": "catalog:typescript"
+    "typescript": "catalog:typescript",
+    "vite-plus": "catalog:build"
   }
 }

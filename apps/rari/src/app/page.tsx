@@ -12,7 +12,7 @@ export default function Home() {
         feature1Color: 'text-green-700',
         feature2: 'Zero',
         feature2Color: 'text-green-600',
-        poweredBy: 'rari\'s Rust runtime',
+        poweredBy: "rari's Rust runtime",
       }}
     />
   )

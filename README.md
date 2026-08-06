@@ -19,6 +19,7 @@ This benchmark suite provides a comprehensive comparison between **rari** (Rust-
 ## Benchmark Objectives
 
 ### Performance Metrics
+
 - **Server-side rendering speed** - Time to render all components on server
 - **Time to First Byte (TTFB)** - Server response latency (P50, P95, P99)
 - **Streaming delivery** - Progressive Suspense chunks on `/stream`
@@ -28,19 +29,23 @@ This benchmark suite provides a comprehensive comparison between **rari** (Rust-
 - **Memory usage** - Runtime memory consumption under load
 
 ### What's Being Tested
+
 The benchmark suite tests:
+
 - **Homepage (`/`)** — 8 Server Components rendered statically (Counter, TestComponent, ShoppingList, WhatsHot, EnvTestComponent, FetchExample, ServerWithClient, Markdown)
 - **Streaming (`/stream`)** — 10 Suspense boundaries with clustered delays for progressive RSC delivery
 
 ## Quick Start
 
 ### Prerequisites
+
 - Node.js 22+
 - pnpm (install with `corepack enable`)
 - Rust and Cargo
 - **just** - Command runner (install with `cargo install just`)
 
 ### Setup
+
 ```bash
 # One-command setup (installs all dependencies and tools)
 just setup
@@ -50,6 +55,7 @@ just init
 ```
 
 ### Run Benchmarks
+
 ```bash
 # Build both apps for production
 just build
@@ -71,13 +77,17 @@ just quick-test-nextjs
 ## Test Scenarios
 
 ### 1. Performance Benchmark
+
 Tests server-side rendering performance with sequential requests:
+
 - **Warmup phase** - 50 requests to warm up the server
 - **Test phase** - 20 measured requests
 - **Metrics collected** - Min, max, avg, P50, P95, P99 response times, response size, error rate
 
 ### 2. Streaming Suspense Benchmark
+
 Standalone test for progressive RSC streaming on `/stream` (inspired by [rari-vs-nextjs](https://github.com/jarick/rari-vs-nextjs)):
+
 - **Route** - 10 `<Suspense>` boundaries with delays 100ms×5, 500ms×3, 1000ms×2
 - **rari** - `loading.tsx` enables streaming mode
 - **Next.js** - `force-dynamic` + Suspense
@@ -95,25 +105,31 @@ just streamtest-profile
 ```
 
 ### 3. Load Test
+
 Tests concurrent request handling using `oha`:
+
 - **Duration** - 30 seconds (configurable)
 - **Concurrent connections** - 50 (configurable)
 - **Metrics collected** - Throughput (req/sec), latency percentiles, error rates, timeouts
 
 ### 4. Build Time Test
+
 Compares production build performance:
+
 - **Build command** - `pnpm run build` for both frameworks
 - **Metrics collected** - Build duration, bundle size, chunk count, warnings, errors
 
 ## Metrics Collection
 
 ### Performance Benchmark Metrics
+
 - **Response times** - Min, max, avg, P50, P95, P99 (in milliseconds)
 - **Response size** - Average payload size in bytes
 - **Success rate** - Percentage of successful requests
 - **Error count** - Number of failed requests
 
 ### Streaming Benchmark Metrics
+
 - **TTFB** - Time to first byte / first chunk
 - **First content** - When the first resolved Suspense card marker (`data-bench-stream="resolved"`) appears
 - **Resolved cards** - Count of resolved cards in the response (expected: 10)
@@ -124,12 +140,14 @@ Compares production build performance:
 - **Throughput** - req/s under light concurrent load on `/stream`
 
 ### Load Test Metrics
+
 - **Throughput** - Requests per second (avg, min, max)
 - **Latency** - Response time percentiles (P50, P90, P95, P99) in milliseconds
 - **Errors** - Failed requests and timeouts
 - **Duration** - Total test duration
 
 ### Build Metrics
+
 - **Build time** - Total production build duration
 - **Bundle size** - Total size of client-side JavaScript and CSS
 - **Chunk count** - Number of generated files
@@ -140,6 +158,7 @@ Compares production build performance:
 Both applications are configured to be as equivalent as possible:
 
 ### Shared Features
+
 - App Router with file-based routing
 - Homepage route (`/`) with 8 server components
 - Streaming route (`/stream`) with identical Suspense trees
@@ -149,11 +168,13 @@ Both applications are configured to be as equivalent as possible:
 - Identical component implementations
 
 ### rari App
+
 - Rust-powered React Server Components runtime
 - Vite-based build system
 - Production server on port 3000
 
 ### Next.js App
+
 - Node.js-based React framework
 - Turbopack build system
 - Production server on port 3001
@@ -164,33 +185,34 @@ Based on the latest benchmark run (May 25, 2026) (rari v0.13.11):
 
 ### Build Performance
 
-| Metric | rari | Next.js | Improvement |
-|--------|------|---------|-------------|
-| Build Time | 1.75s | 4.42s | 60.5% faster |
+| Metric        | rari                | Next.js             | Improvement   |
+| ------------- | ------------------- | ------------------- | ------------- |
+| Build Time    | 1.75s               | 4.42s               | 60.5% faster  |
 | Client Bundle | 285.15 KB (6 files) | 634.29 KB (8 files) | 55.0% smaller |
 
 ### Performance Benchmark
 
-| Metric | rari | Next.js | Improvement |
-|--------|------|---------|-------------|
-| Average Response Time | 0.12ms | 2.17ms | 94.6% faster |
-| P95 Latency | 0.16ms | 2.37ms | 93.2% faster |
-| Response Size | 24,471 bytes | 33,247 bytes | 26.4% smaller |
+| Metric                | rari         | Next.js      | Improvement   |
+| --------------------- | ------------ | ------------ | ------------- |
+| Average Response Time | 0.12ms       | 2.17ms       | 94.6% faster  |
+| P95 Latency           | 0.16ms       | 2.37ms       | 93.2% faster  |
+| Response Size         | 24,471 bytes | 33,247 bytes | 26.4% smaller |
 
 ### Load Test Performance (30s duration, 50 concurrent connections)
 
-| Metric | rari | Next.js | Improvement |
-|--------|------|---------|-------------|
-| Throughput | 97,825.93 req/sec | 1,451.84 req/sec | 6,638.0% higher |
-| Average Latency | 0.51ms | 34.46ms | 98.5% faster |
-| P95 Latency | 0.82ms | 43.41ms | 98.1% faster |
-| Total Requests | 2,935,293 | 43,559 | 6,638.0% more |
-| Errors | 0 | 0 | 100% success rate |
-| Timeouts | 0 | 0 | 100% success rate |
+| Metric          | rari              | Next.js          | Improvement       |
+| --------------- | ----------------- | ---------------- | ----------------- |
+| Throughput      | 97,825.93 req/sec | 1,451.84 req/sec | 6,638.0% higher   |
+| Average Latency | 0.51ms            | 34.46ms          | 98.5% faster      |
+| P95 Latency     | 0.82ms            | 43.41ms          | 98.1% faster      |
+| Total Requests  | 2,935,293         | 43,559           | 6,638.0% more     |
+| Errors          | 0                 | 0                | 100% success rate |
+| Timeouts        | 0                 | 0                | 100% success rate |
 
 ## Running Individual Tests
 
 ### Starting Servers
+
 ```bash
 # Start Rari production server (port 3000)
 just start-rari
@@ -203,12 +225,14 @@ just check-servers
 ```
 
 ### Performance Testing
+
 ```bash
 # Run performance benchmark (requires servers to be running)
 just benchmark
 ```
 
 ### Load Testing
+
 ```bash
 # Run load test (requires servers to be running)
 just loadtest
@@ -219,6 +243,7 @@ just quick-test-nextjs 30s 100
 ```
 
 ### Streaming Testing
+
 ```bash
 # Per-chunk profile + throughput on /stream
 just streamtest
@@ -228,12 +253,14 @@ just streamtest-profile
 ```
 
 ### Build Time Testing
+
 ```bash
 # Run build time comparison
 just buildtest
 ```
 
 ### Viewing Results
+
 ```bash
 # View latest results
 just results
@@ -246,6 +273,7 @@ just results-stream
 ```
 
 ### Development Commands
+
 ```bash
 # Clean build artifacts
 just clean
@@ -268,11 +296,13 @@ Run `just` to see all available commands, or `just --list` for a detailed list.
 ### Common Workflows
 
 **First-time setup:**
+
 ```bash
 just init
 ```
 
 **Running benchmarks:**
+
 ```bash
 # 1. Build the apps
 just build
@@ -286,6 +316,7 @@ just benchmark-all
 ```
 
 **Quick iteration:**
+
 ```bash
 just rebuild
 just buildtest

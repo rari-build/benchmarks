@@ -1,28 +1,33 @@
 interface BlueskyPost {
-  uri: string
-  cid: string
-  author: {
-    did: string
-    handle: string
-    displayName?: string
-    avatar?: string
+  readonly uri: string
+  readonly cid: string
+  readonly author: {
+    readonly did: string
+    readonly handle: string
+    readonly displayName?: string
+    readonly avatar?: string
   }
-  record: {
-    text: string
-    createdAt: string
-    langs?: string[]
+  readonly record: {
+    readonly text: string
+    readonly createdAt: string
+    readonly langs?: readonly string[]
   }
-  replyCount: number
-  repostCount: number
-  likeCount: number
-  indexedAt: string
+  readonly replyCount: number
+  readonly repostCount: number
+  readonly likeCount: number
+  readonly indexedAt: string
 }
 
 interface BlueskyFeedResponse {
-  feed: Array<{
-    post: BlueskyPost
+  readonly feed: ReadonlyArray<{
+    readonly post: BlueskyPost
   }>
-  cursor?: string
+  readonly cursor?: string
+}
+
+function isBlueskyFeedResponse(value: unknown): value is BlueskyFeedResponse {
+  if (typeof value !== 'object' || value === null || !('feed' in value)) return false
+  return Array.isArray(value.feed)
 }
 
 export default async function WhatsHot() {
@@ -42,7 +47,11 @@ export default async function WhatsHot() {
       throw new Error(`Failed to fetch Bluesky feed: ${response.status}`)
     }
 
-    const data: BlueskyFeedResponse = await response.json()
+    const json: unknown = await response.json()
+    if (!isBlueskyFeedResponse(json)) {
+      throw new Error('Unexpected Bluesky feed response shape')
+    }
+    const data = json
     // eslint-disable-next-line react/purity
     const currentTime = new Date().toLocaleTimeString()
 
@@ -51,47 +60,32 @@ export default async function WhatsHot() {
         <h1 className="text-2xl font-bold text-blue-600 mb-2">🔥 What's Hot on Bluesky</h1>
 
         <div className="mb-4 text-sm text-gray-500">
-          Fetched at:
-          {' '}
-          {currentTime}
-          {' '}
-          •
-          {' '}
-          {data.feed.length}
-          {' '}
-          trending posts
+          Fetched at: {currentTime} • {data.feed.length} trending posts
         </div>
 
         <div className="space-y-4">
           {data.feed.slice(0, 5).map((item, index) => {
             const post = item.post
             const timeAgo = new Date(post.record.createdAt).toLocaleDateString()
+            const displayName = post.author.displayName ?? post.author.handle
+            const avatar = post.author.avatar
 
             return (
-              <div key={post.uri} className="border-l-4 border-blue-500 pl-4 py-3 bg-gray-50 rounded-r">
+              <div
+                key={post.uri}
+                className="border-l-4 border-blue-500 pl-4 py-3 bg-gray-50 rounded-r"
+              >
                 <div className="flex items-start justify-between mb-2">
                   <div className="flex items-center space-x-2">
-                    {post.author.avatar && (
-                      <img
-                        src={post.author.avatar}
-                        alt={post.author.displayName || post.author.handle}
-                        className="w-8 h-8 rounded-full"
-                      />
-                    )}
+                    {avatar != null && avatar !== '' ? (
+                      <img src={avatar} alt={displayName} className="w-8 h-8 rounded-full" />
+                    ) : null}
                     <div>
-                      <div className="font-semibold text-gray-800">
-                        {post.author.displayName || post.author.handle}
-                      </div>
-                      <div className="text-sm text-gray-500">
-                        @
-                        {post.author.handle}
-                      </div>
+                      <div className="font-semibold text-gray-800">{displayName}</div>
+                      <div className="text-sm text-gray-500">@{post.author.handle}</div>
                     </div>
                   </div>
-                  <div className="text-xs text-gray-400">
-                    #
-                    {index + 1}
-                  </div>
+                  <div className="text-xs text-gray-400">#{index + 1}</div>
                 </div>
 
                 <p className="text-gray-700 mb-3 leading-relaxed">
@@ -122,16 +116,21 @@ export default async function WhatsHot() {
 
         <div className="mt-6 text-xs text-gray-400 border-t pt-4">
           <p>Data fetched from Bluesky's public API using the "What's Hot" algorithmic feed.</p>
-          <p>This demonstrates server-side rendering with external API calls - no authentication required!</p>
+          <p>
+            This demonstrates server-side rendering with external API calls - no authentication
+            required!
+          </p>
         </div>
       </div>
     )
-  }
-  catch (error) {
+  } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error'
 
     return (
-      <div className="p-5 bg-red-50 border border-red-200 rounded-lg shadow-sm" data-component-id="whatshot-error">
+      <div
+        className="p-5 bg-red-50 border border-red-200 rounded-lg shadow-sm"
+        data-component-id="whatshot-error"
+      >
         <h1 className="text-2xl font-bold text-red-700 mb-2">🔥 What's Hot on Bluesky</h1>
 
         <div className="bg-red-100 border border-red-300 rounded p-4">

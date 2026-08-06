@@ -26,18 +26,12 @@ name = "streaming"
 path = "src/bin/streaming.rs"
 
 [dependencies]
-tokio = { version = "1.53.1", features = [
-  "full",
-  "process"
-] }
+tokio = { version = "1.53.1", features = ["full", "process"] }
 anyhow = "1.0.104"
-clap = { version = "4.6.5", features = [ "derive" ] }
+clap = { version = "4.6.5", features = ["derive"] }
 colored = "3.1.1"
 futures-util = "0.3.33"
-serde = { version = "1.0.229", features = [ "derive" ] }
-serde_json = { version = "1.0.151", features = [ "preserve_order" ] }
-reqwest = { version = "0.13.4", features = [
-  "json",
-  "stream"
-] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = { version = "1.0.151", features = ["preserve_order"] }
+reqwest = { version = "0.13.4", features = ["json", "stream"] }
 tabled = "0.21.0"

@@ -1,5 +1,11 @@
-export async function getTodosList() {
-  const groceries = [
+export interface TodoItem {
+  id: number
+  text: string
+  completed: boolean
+}
+
+export function getTodosList(): TodoItem[] {
+  return [
     { id: 1, text: '🥛 Buy milk', completed: true },
     { id: 2, text: '🍞 Get fresh bread', completed: true },
     { id: 3, text: '🥕 Pick up carrots', completed: true },
@@ -11,15 +17,8 @@ export async function getTodosList() {
     { id: 9, text: '🍝 Pasta for dinner', completed: false },
     { id: 10, text: '☕ Coffee beans', completed: false },
   ]
-
-  return groceries
 }
 
-export async function add(a: number, b: number): Promise<number> {
-  const numA = Number(a)
-  const numB = Number(b)
-
-  const result = numA + numB
-
-  return result
+export function add(a: number, b: number): number {
+  return a + b
 }

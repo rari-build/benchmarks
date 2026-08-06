@@ -6,19 +6,26 @@ const delays = {
   slow: [1000, 1000],
 }
 
-async function Header({ framework }: { framework: string }) {
-  await new Promise(r => setTimeout(r, 1))
-  return (
-    <h1>
-      {framework}
-      {' '}
-      Streaming Benchmark
-    </h1>
-  )
+interface HeaderProps {
+  readonly framework: string
 }
 
-async function Card({ delay, title }: { delay: number, title: string }) {
-  await new Promise(r => setTimeout(r, delay))
+async function Header({ framework }: HeaderProps) {
+  await new Promise<void>(resolve => {
+    setTimeout(resolve, 1)
+  })
+  return <h1>{framework} Streaming Benchmark</h1>
+}
+
+interface CardProps {
+  readonly delay: number
+  readonly title: string
+}
+
+async function Card({ delay, title }: CardProps) {
+  await new Promise<void>(resolve => {
+    setTimeout(resolve, delay)
+  })
   return (
     <div
       data-bench-stream="resolved"
@@ -26,9 +33,7 @@ async function Card({ delay, title }: { delay: number, title: string }) {
     >
       <h3>{title}</h3>
       <p>
-        Loaded after
-        {' '}
-        {delay}
+        Loaded after {delay}
         ms
       </p>
     </div>
@@ -45,9 +50,7 @@ function Skeleton() {
         background: '#f5f5f5',
       }}
     >
-      <div
-        style={{ height: 24, width: '60%', background: '#ddd', borderRadius: 4 }}
-      />
+      <div style={{ height: 24, width: '60%', background: '#ddd', borderRadius: 4 }} />
       <div
         style={{
           height: 16,
@@ -61,18 +64,22 @@ function Skeleton() {
   )
 }
 
-function SkeletonCards({
-  label,
-  items,
-}: {
-  label: string
-  items: { delay: number, title: string }[]
-}) {
+interface StreamItem {
+  readonly delay: number
+  readonly title: string
+}
+
+interface SkeletonCardsProps {
+  readonly label: string
+  readonly items: readonly StreamItem[]
+}
+
+function SkeletonCards({ label, items }: SkeletonCardsProps) {
   return (
     <>
       <h2>{label}</h2>
-      {items.map((item, i) => (
-        <Suspense key={i} fallback={<Skeleton />}>
+      {items.map(item => (
+        <Suspense key={item.title} fallback={<Skeleton />}>
           <Card delay={item.delay} title={item.title} />
         </Suspense>
       ))}
@@ -81,10 +88,10 @@ function SkeletonCards({
 }
 
 interface StreamPageProps {
-  framework: string
+  readonly framework: string
 }
 
-export default async function StreamPage({ framework }: StreamPageProps) {
+export default function StreamPage({ framework }: StreamPageProps) {
   return (
     <main>
       <Header framework={framework} />

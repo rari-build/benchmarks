@@ -8,16 +8,16 @@ import TestComponent from './TestComponent'
 import WhatsHot from './WhatsHot'
 
 interface HomePageProps {
-  framework: {
-    name: string
-    emoji: string
-    runtime: string
-    runtimeColor: string
-    feature1: string
-    feature1Color: string
-    feature2: string
-    feature2Color: string
-    poweredBy: string
+  readonly framework: {
+    readonly name: string
+    readonly emoji: string
+    readonly runtime: string
+    readonly runtimeColor: string
+    readonly feature1: string
+    readonly feature1Color: string
+    readonly feature2: string
+    readonly feature2Color: string
+    readonly poweredBy: string
   }
 }
 
@@ -27,21 +27,21 @@ export default function HomePage({ framework }: HomePageProps) {
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-200 text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            {framework.emoji}
-            {' '}
-            {framework.name}
-            {' '}
-            Framework Benchmark
+            {framework.emoji} {framework.name} Framework Benchmark
           </h1>
-          <p className="text-xl text-gray-600 mb-6">
-            Server Component Performance Testing Suite
-          </p>
-          <div className={`grid grid-cols-1 md:grid-cols-3 gap-4 ${framework.runtimeColor} p-6 rounded-lg`}>
+          <p className="text-xl text-gray-600 mb-6">Server Component Performance Testing Suite</p>
+          <div
+            className={`grid grid-cols-1 md:grid-cols-3 gap-4 ${framework.runtimeColor} p-6 rounded-lg`}
+          >
             <div className="text-center">
-              <div className={`text-2xl font-bold ${framework.runtimeColor.replace('bg-', 'text-').replace('-50', '-600')}`}>
+              <div
+                className={`text-2xl font-bold ${framework.runtimeColor.replace('bg-', 'text-').replace('-50', '-600')}`}
+              >
                 {framework.runtime}
               </div>
-              <div className={`text-sm ${framework.runtimeColor.replace('bg-', 'text-').replace('-50', '-700')}`}>
+              <div
+                className={`text-sm ${framework.runtimeColor.replace('bg-', 'text-').replace('-50', '-700')}`}
+              >
                 Runtime Engine
               </div>
             </div>
@@ -53,7 +53,9 @@ export default function HomePage({ framework }: HomePageProps) {
               <div className={`text-2xl font-bold ${framework.feature2Color}`}>
                 {framework.feature2}
               </div>
-              <div className={`text-sm ${framework.feature2Color.replace('text-', 'text-').replace('-600', '-700')}`}>
+              <div
+                className={`text-sm ${framework.feature2Color.replace('text-', 'text-').replace('-600', '-700')}`}
+              >
                 {framework.feature1}
               </div>
             </div>
@@ -75,12 +77,16 @@ export default function HomePage({ framework }: HomePageProps) {
             </div>
 
             <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">Test Component</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">
+                Test Component
+              </h3>
               <TestComponent />
             </div>
 
             <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">Shopping List</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">
+                Shopping List
+              </h3>
               <ShoppingList />
             </div>
 
@@ -90,22 +96,30 @@ export default function HomePage({ framework }: HomePageProps) {
             </div>
 
             <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">Environment Test</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">
+                Environment Test
+              </h3>
               <EnvTestComponent />
             </div>
 
             <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">Fetch Example</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">
+                Fetch Example
+              </h3>
               <FetchExample />
             </div>
 
             <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">Server with Client</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">
+                Server with Client
+              </h3>
               <ServerWithClient />
             </div>
 
             <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">Markdown Renderer</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">
+                Markdown Renderer
+              </h3>
               <Markdown />
             </div>
           </div>
@@ -135,11 +149,7 @@ export default function HomePage({ framework }: HomePageProps) {
             <p className="text-gray-600">
               Static server component rendering for accurate performance benchmarking.
               <br />
-              <span className="text-sm text-gray-500">
-                Powered by
-                {' '}
-                {framework.poweredBy}
-              </span>
+              <span className="text-sm text-gray-500">Powered by {framework.poweredBy}</span>
             </p>
           </div>
         </div>

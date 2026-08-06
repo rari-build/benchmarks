@@ -5,13 +5,16 @@ Welcome to the **React Server Components (RSC)** demonstration! This markdown co
 ## ✨ Server-Side Rendering Benefits
 
 ### 📦 Bundle Size Optimization
+
 When markdown is processed on the server:
+
 - **Zero client-side JS** for markdown parsing
 - `markdown-it` library stays on the server
 - Faster initial page loads
 - Better Core Web Vitals
 
 ### 🔒 Security & Performance
+
 - Content is pre-processed and sanitized server-side
 - No risk of client-side XSS from markdown
 - SEO-friendly - content is immediately available
@@ -39,11 +42,11 @@ export default async function MarkdownComponent() {
 
 ## 📊 RSC vs Traditional Approaches
 
-| Approach | Bundle Size | First Paint | SEO | Hydration |
-|----------|-------------|-------------|-----|-----------|
-| **RSC + Server MD** | 📉 Minimal | 🚀 Fast | ✅ Perfect | ❌ Not needed |
-| **Client-side MD** | 📈 +50KB | 🐌 Slower | ⚠️ Delayed | ✅ Required |
-| **Static Generation** | 📉 Minimal | 🚀 Fast | ✅ Perfect | ❌ Not needed |
+| Approach              | Bundle Size | First Paint | SEO        | Hydration     |
+| --------------------- | ----------- | ----------- | ---------- | ------------- |
+| **RSC + Server MD**   | 📉 Minimal  | 🚀 Fast     | ✅ Perfect | ❌ Not needed |
+| **Client-side MD**    | 📈 +50KB    | 🐌 Slower   | ⚠️ Delayed | ✅ Required   |
+| **Static Generation** | 📉 Minimal  | 🚀 Fast     | ✅ Perfect | ❌ Not needed |
 
 ## 🎯 Content Organization Best Practices
 
