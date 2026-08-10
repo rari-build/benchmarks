@@ -1,0 +1,34 @@
+{
+  "timestamp": "2026-08-10T20:03:59Z",
+  "rari": {
+    "Homepage (All Components)": {
+      "min": 0.077,
+      "max": 0.552,
+      "avg": 0.116,
+      "p50": 0.091,
+      "p95": 0.12,
+      "p99": 0.12,
+      "avgSize": 51152,
+      "errors": 0,
+      "successRate": 100
+    }
+  },
+  "nextjs": {
+    "Homepage (All Components)": {
+      "min": 1.47,
+      "max": 3.572,
+      "avg": 1.736,
+      "p50": 1.53,
+      "p95": 2.436,
+      "p99": 2.436,
+      "avgSize": 32906,
+      "errors": 0,
+      "successRate": 100
+    }
+  },
+  "summary": {
+    "testRequests": 20,
+    "warmupRequests": 50,
+    "scenarios": 1
+  }
+}

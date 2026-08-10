@@ -181,33 +181,47 @@ Both applications are configured to be as equivalent as possible:
 
 ## Actual Results
 
-Based on the latest benchmark run (May 25, 2026) (rari v0.13.11):
+Based on the latest benchmark run (August 10, 2026) (rari v0.15.9):
 
 ### Build Performance
 
 | Metric        | rari                | Next.js             | Improvement   |
 | ------------- | ------------------- | ------------------- | ------------- |
-| Build Time    | 1.75s               | 4.42s               | 60.5% faster  |
-| Client Bundle | 285.15 KB (6 files) | 634.29 KB (8 files) | 55.0% smaller |
+| Build Time    | 1.12s               | 3.88s               | 71.2% faster  |
+| Client Bundle | 286.92 KB (6 files) | 572.93 KB (8 files) | 49.9% smaller |
 
 ### Performance Benchmark
 
 | Metric                | rari         | Next.js      | Improvement   |
 | --------------------- | ------------ | ------------ | ------------- |
-| Average Response Time | 0.12ms       | 2.17ms       | 94.6% faster  |
-| P95 Latency           | 0.16ms       | 2.37ms       | 93.2% faster  |
-| Response Size         | 24,471 bytes | 33,247 bytes | 26.4% smaller |
+| Average Response Time | 0.12ms       | 1.74ms       | 93.3% faster  |
+| P95 Latency           | 0.12ms       | 2.44ms       | 95.1% faster  |
+| Response Size         | 51,152 bytes | 32,906 bytes | 35.7% smaller |
 
 ### Load Test Performance (30s duration, 50 concurrent connections)
 
 | Metric          | rari              | Next.js          | Improvement       |
 | --------------- | ----------------- | ---------------- | ----------------- |
-| Throughput      | 97,825.93 req/sec | 1,451.84 req/sec | 6,638.0% higher   |
-| Average Latency | 0.51ms            | 34.46ms          | 98.5% faster      |
-| P95 Latency     | 0.82ms            | 43.41ms          | 98.1% faster      |
-| Total Requests  | 2,935,293         | 43,559           | 6,638.0% more     |
+| Throughput      | 89,371.33 req/sec | 1,682.55 req/sec | 5,211.7% higher   |
+| Average Latency | 0.56ms            | 29.73ms          | 98.1% faster      |
+| P95 Latency     | 0.90ms            | 36.70ms          | 97.5% faster      |
+| Total Requests  | 2,681,727         | 50,482           | 5,211.7% more     |
 | Errors          | 0                 | 0                | 100% success rate |
 | Timeouts        | 0                 | 0                | 100% success rate |
+
+### Streaming Suspense (`/stream`)
+
+| Metric              | rari        | Next.js     | Ratio  |
+| ------------------- | ----------- | ----------- | ------ |
+| TTFB                | 1ms         | 12ms        | 11.14x |
+| First content       | 107ms       | 108ms       | 1.02x  |
+| Last byte           | 1007ms      | 1009ms      | 1.00x  |
+| Resolved cards      | 10          | 10          | —      |
+| HTTP frames         | 12          | 10          | —      |
+| Gap p95             | 500ms       | 500ms       | 1.00x  |
+| Resolved @500ms     | 5           | 5           | —      |
+| Resolved @1000ms    | 8           | 8           | —      |
+| Throughput (15s/25) | 24.99 req/s | 24.99 req/s | 1.00x  |
 
 ## Running Individual Tests
 
@@ -281,9 +295,10 @@ just clean
 # Clean and rebuild
 just rebuild
 
-# Format and check code
+# Format, check, and lint
 just fmt
 just check
+just lint
 
 # Compile benchmark tools
 just compile
