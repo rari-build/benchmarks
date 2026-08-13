@@ -198,12 +198,13 @@ fn build_http_client(timeout: Duration) -> Result<reqwest::Client> {
 }
 
 async fn check_server(name: &str, port: u16) -> Result<()> {
-    let url = format!("http://localhost:{}/stream", port);
+    let url = format!("http://localhost:{port}/stream");
     let client = build_http_client(Duration::from_secs(15))?;
-    client.get(&url).send().await.context(format!(
-        "{} streaming route is not responding at {}",
-        name, url
-    ))?;
+    client
+        .get(&url)
+        .send()
+        .await
+        .context(format!("{name} streaming route is not responding at {url}"))?;
     println!("{} {} /stream is responding", "✅".green(), name);
     Ok(())
 }
@@ -232,7 +233,7 @@ fn median_f64(values: &[f64]) -> f64 {
         return 0.0;
     }
     let mut sorted = values.to_vec();
-    sorted.sort_by(|a, b| a.partial_cmp(b).unwrap());
+    sorted.sort_by(f64::total_cmp);
     sorted[sorted.len() / 2]
 }
 
@@ -280,7 +281,7 @@ async fn profile_once(client: &reqwest::Client, url: &str) -> Result<StreamProfi
     for i in 1..chunks.len() {
         gaps.push(chunks[i].ms - chunks[i - 1].ms);
     }
-    gaps.sort_by(|a, b| a.partial_cmp(b).unwrap());
+    gaps.sort_by(f64::total_cmp);
 
     let gap_mean = if gaps.is_empty() {
         0.0
@@ -458,7 +459,7 @@ async fn profile_target(
     runs: usize,
     timeout: Duration,
 ) -> FrameworkStreamingResult {
-    let url = format!("http://localhost:{}/stream", port);
+    let url = format!("http://localhost:{port}/stream");
     println!("\n{} Profiling {} ({})", "📡".bold(), name.bold(), url);
 
     let client = match build_http_client(timeout) {
@@ -487,7 +488,7 @@ async fn profile_target(
                     profile.ttfb_ms,
                     profile
                         .first_content_chunk_ms
-                        .map(|v| format!("{:.0}ms", v))
+                        .map(|v| format!("{v:.0}ms"))
                         .unwrap_or_else(|| "—".to_string()),
                     profile.last_byte_ms,
                     profile.resolved_cards,
@@ -496,7 +497,7 @@ async fn profile_target(
                 profiles.push(profile);
             }
             Err(e) => {
-                println!("  Run {}/{}: ERROR {}", run, runs, e);
+                println!("  Run {run}/{runs}: ERROR {e}");
             }
         }
     }
@@ -536,11 +537,11 @@ async fn measure_throughput(
         connections
     );
 
-    let url = format!("http://localhost:{}/stream", port);
+    let url = format!("http://localhost:{port}/stream");
     let output = Command::new("oha")
         .arg(&url)
         .arg("-z")
-        .arg(format!("{}s", duration))
+        .arg(format!("{duration}s"))
         .arg("-c")
         .arg(connections.to_string())
         .arg("-H")
@@ -554,7 +555,7 @@ async fn measure_throughput(
 
     if !output.status.success() {
         let stderr = String::from_utf8_lossy(&output.stderr);
-        anyhow::bail!("oha failed: {}", stderr);
+        anyhow::bail!("oha failed: {stderr}");
     }
 
     let stdout = String::from_utf8_lossy(&output.stdout);
@@ -611,11 +612,11 @@ fn display_results(rari: &FrameworkStreamingResult, nextjs: &FrameworkStreamingR
             metric: "First content (ms)".to_string(),
             rari: rp
                 .first_content_chunk_ms
-                .map(|v| format!("{:.0}", v))
+                .map(|v| format!("{v:.0}"))
                 .unwrap_or_else(|| "—".to_string()),
             nextjs: np
                 .first_content_chunk_ms
-                .map(|v| format!("{:.0}", v))
+                .map(|v| format!("{v:.0}"))
                 .unwrap_or_else(|| "—".to_string()),
             ratio: match (rp.first_content_chunk_ms, np.first_content_chunk_ms) {
                 (Some(a), Some(b)) => format!("{:.2}x", ratio(b, a)),
@@ -706,7 +707,7 @@ async fn save_results(results: &StreamingBenchmarkResults, results_dir: &PathBuf
     fs::create_dir_all(results_dir).await?;
 
     let date = time_utils::format_date(SystemTime::now());
-    let filename = results_dir.join(format!("streaming-{}.json", date));
+    let filename = results_dir.join(format!("streaming-{date}.json"));
     let json = format!("{}\n", serde_json::to_string_pretty(results)?);
 
     fs::write(&filename, &json).await?;
@@ -716,7 +717,9 @@ async fn save_results(results: &StreamingBenchmarkResults, results_dir: &PathBuf
         root = serde_json::json!({});
     }
 
-    let root_obj = root.as_object_mut().expect("latest.json root is an object");
+    let root_obj = root
+        .as_object_mut()
+        .context("latest.json root is not an object")?;
     for (framework, value) in [
         ("rari", serde_json::to_value(&results.rari)?),
         ("nextjs", serde_json::to_value(&results.nextjs)?),
@@ -726,7 +729,7 @@ async fn save_results(results: &StreamingBenchmarkResults, results_dir: &PathBuf
             .or_insert_with(|| serde_json::json!({}));
         entry
             .as_object_mut()
-            .expect("framework section is an object")
+            .context("framework section is not an object")?
             .insert("Streaming Suspense".to_string(), value);
     }
     root_obj.insert(
@@ -737,7 +740,7 @@ async fn save_results(results: &StreamingBenchmarkResults, results_dir: &PathBuf
     let scenario_count = root_obj
         .get("rari")
         .and_then(|v| v.as_object())
-        .map(|m| m.len())
+        .map(serde_json::Map::len)
         .unwrap_or(0);
     let summary = root_obj
         .entry("summary".to_string())
@@ -771,23 +774,15 @@ async fn main() -> Result<()> {
             .dimmed()
     );
 
-    if let Err(e) = check_server("rari", args.rari_port).await {
-        eprintln!("{} {}", "❌".red(), e);
-        eprintln!("Please start the rari server with: just start-rari");
-        std::process::exit(1);
-    }
+    check_server("rari", args.rari_port)
+        .await
+        .context("Please start the rari server with: just start-rari")?;
+    check_server("Next.js", args.nextjs_port)
+        .await
+        .context("Please start the Next.js server with: just start-nextjs")?;
 
-    if let Err(e) = check_server("Next.js", args.nextjs_port).await {
-        eprintln!("{} {}", "❌".red(), e);
-        eprintln!("Please start the Next.js server with: just start-nextjs");
-        std::process::exit(1);
-    }
-
-    if !args.profile_only
-        && let Err(e) = check_oha_installed().await
-    {
-        eprintln!("{} {}", "❌".red(), e);
-        std::process::exit(1);
+    if !args.profile_only {
+        check_oha_installed().await?;
     }
 
     let timeout = Duration::from_secs(args.timeout);

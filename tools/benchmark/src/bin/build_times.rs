@@ -58,7 +58,7 @@ async fn run_build(name: &str, directory: &Path, command: &str) -> Result<BuildR
 
     let stdout = String::from_utf8_lossy(&output.stdout);
     let stderr = String::from_utf8_lossy(&output.stderr);
-    let combined = format!("{}{}", stdout, stderr);
+    let combined = format!("{stdout}{stderr}");
 
     let success = output.status.success();
 
@@ -211,7 +211,7 @@ async fn save_results(results: &BenchmarkResults, base_dir: &Path) -> Result<()>
     fs::create_dir_all(&results_dir).await?;
 
     let date = time_utils::format_date(SystemTime::now());
-    let filename = results_dir.join(format!("buildtimes-{}.json", date));
+    let filename = results_dir.join(format!("buildtimes-{date}.json"));
 
     let json = format!("{}\n", serde_json::to_string_pretty(results)?);
     fs::write(&filename, json).await?;

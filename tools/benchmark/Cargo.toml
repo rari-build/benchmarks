@@ -35,3 +35,6 @@ serde = { version = "1.0.229", features = ["derive"] }
 serde_json = { version = "1.0.151", features = ["preserve_order"] }
 reqwest = { version = "0.13.4", features = ["json", "stream"] }
 tabled = "0.21.0"
+
+[lints]
+workspace = true

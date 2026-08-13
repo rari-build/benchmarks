@@ -7,3 +7,83 @@ authors = ["Ryan Skinner"]
 edition = "2024"
 license = "MIT"
 repository = "https://github.com/rari-build/benchmarks"
+
+[workspace.lints.clippy]
+# Restriction rules for better code quality
+allow_attributes = "deny"
+clone_on_ref_ptr = "deny"
+dbg_macro = "deny"
+empty_drop = "deny"
+exit = "allow"
+filetype_is_file = "deny"
+get_unwrap = "deny"
+print_stdout = "allow"
+rc_buffer = "deny"
+rc_mutex = "deny"
+rest_pat_in_fully_bound_structs = "deny"
+unnecessary_safety_comment = "deny"
+
+# Enforce proper error handling with anyhow/thiserror
+# Prefer: ? operator > pattern matching > unwrap_or/ok_or > expect (only for proven invariants)
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "warn"
+todo = "warn"
+unimplemented = "warn"
+
+# Avoid unnecessary allocations
+format_collect = "warn"
+string_add = "warn"
+string_add_assign = "warn"
+inefficient_to_string = "warn"
+
+# Force non-exhaustive on public types
+exhaustive_structs = "warn"
+exhaustive_enums = "warn"
+missing_errors_doc = "warn"
+
+# Pedantic rules
+pedantic = { level = "warn", priority = -1 }
+
+# Pedantic overrides
+case_sensitive_file_extension_comparisons = "allow"
+# Benchmark math routinely converts between integer counts and f64 averages.
+cast_possible_truncation = "allow"
+cast_precision_loss = "allow"
+cast_sign_loss = "allow"
+collapsible_if = "allow"
+doc_markdown = "allow"
+inconsistent_struct_constructor = "allow"
+map_unwrap_or = "allow"
+missing_const_for_fn = "allow"
+missing_panics_doc = "allow"
+module_inception = "allow"
+module_name_repetitions = "allow"
+must_use_candidate = "allow"
+needless_for_each = "allow"
+new_without_default = "allow"
+similar_names = "allow"
+single_match = "allow"
+single_match_else = "allow"
+# JSON field names like at_500ms / ttfb_ratio are intentional.
+struct_field_names = "allow"
+too_many_lines = "allow"
+use_self = "warn"
+
+# Nursery rules that are useful
+absolute_paths = "allow"
+debug_assert_with_mut_call = "warn"
+iter_on_single_items = "warn"
+needless_pass_by_ref_mut = "warn"
+redundant_clone = "warn"
+redundant_pub_crate = "warn"
+significant_drop_in_scrutinee = "warn"
+unused_peekable = "warn"
+
+[profile.dev]
+# Minimal debug info to speed up local and CI builds
+debug = "line-tables-only"
+
+[profile.test]
+# Minimal debug info to speed up test builds
+debug = "line-tables-only"

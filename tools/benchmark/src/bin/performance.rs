@@ -81,10 +81,10 @@ struct ComparisonRow {
 }
 
 async fn check_server(name: &str, port: u16) -> Result<()> {
-    let url = format!("http://localhost:{}", port);
+    let url = format!("http://localhost:{port}");
     reqwest::get(&url)
         .await
-        .context(format!("{} server is not responding at {}", name, url))?;
+        .context(format!("{name} server is not responding at {url}"))?;
     println!("{} {} server is responding", "✅".green(), name);
     Ok(())
 }
@@ -94,12 +94,15 @@ async fn measure_request(url: &str, warmup: usize, requests: usize) -> Result<Pe
         .timeout(Duration::from_secs(10))
         .default_headers({
             let mut headers = reqwest::header::HeaderMap::new();
-            headers.insert("accept-encoding", "zstd, br, gzip".parse().unwrap());
+            headers.insert(
+                "accept-encoding",
+                reqwest::header::HeaderValue::from_static("zstd, br, gzip"),
+            );
             headers
         })
         .build()?;
 
-    println!("  Testing {}...", url);
+    println!("  Testing {url}...");
 
     for _ in 0..warmup {
         let _ = client.get(url).send().await;
@@ -133,7 +136,7 @@ async fn measure_request(url: &str, warmup: usize, requests: usize) -> Result<Pe
     }
 
     let mut sorted_times = times.clone();
-    sorted_times.sort_by(|a, b| a.partial_cmp(b).unwrap());
+    sorted_times.sort_by(f64::total_cmp);
 
     let sum: f64 = times.iter().sum();
     let avg = sum / times.len() as f64;
@@ -219,9 +222,9 @@ fn display_comparison(
                 "🟢 Next.js"
             };
             let diff_str = if diff > 0.0 {
-                format!("+{:.1}%", diff)
+                format!("+{diff:.1}%")
             } else {
-                format!("{:.1}%", diff)
+                format!("{diff:.1}%")
             };
 
             rows.push(ComparisonRow {
@@ -235,7 +238,7 @@ fn display_comparison(
     }
 
     let table = Table::new(rows).to_string();
-    println!("\n{}", table);
+    println!("\n{table}");
 }
 
 fn calculate_summary(
@@ -269,8 +272,8 @@ fn calculate_summary(
 
     println!("\n{}", "📊 Summary".bold());
     println!("Average Response Time:");
-    println!("  🦀 rari:     {:.2}ms", rari_avg);
-    println!("  🟢 Next.js:  {:.2}ms", nextjs_avg);
+    println!("  🦀 rari:     {rari_avg:.2}ms");
+    println!("  🟢 Next.js:  {nextjs_avg:.2}ms");
 
     if improvement > 0.0 {
         println!("  {} rari is {:.1}% faster", "📈".green(), improvement);
@@ -284,7 +287,7 @@ async fn save_results(results: &BenchmarkResults, results_dir: &PathBuf) -> Resu
 
     let now = SystemTime::now();
     let date = time_utils::format_date(now);
-    let filename = results_dir.join(format!("performance-{}.json", date));
+    let filename = results_dir.join(format!("performance-{date}.json"));
 
     let json = format!("{}\n", serde_json::to_string_pretty(results)?);
     fs::write(&filename, &json).await?;
@@ -337,17 +340,12 @@ async fn main() -> Result<()> {
         name: "Homepage (All Components)".to_string(),
     }];
 
-    if let Err(e) = check_server("rari", args.rari_port).await {
-        eprintln!("{} {}", "❌".red(), e);
-        eprintln!("Please start the rari server with: cd apps/rari && pnpm dev");
-        std::process::exit(1);
-    }
-
-    if let Err(e) = check_server("Next.js", args.nextjs_port).await {
-        eprintln!("{} {}", "❌".red(), e);
-        eprintln!("Please start the Next.js server with: cd apps/nextjs && pnpm dev");
-        std::process::exit(1);
-    }
+    check_server("rari", args.rari_port)
+        .await
+        .context("Please start the rari server with: cd apps/rari && pnpm dev")?;
+    check_server("Next.js", args.nextjs_port)
+        .await
+        .context("Please start the Next.js server with: cd apps/nextjs && pnpm dev")?;
 
     println!("\n{}", "Starting benchmark in 3 seconds...".dimmed());
     tokio::time::sleep(Duration::from_secs(3)).await;

@@ -113,10 +113,10 @@ async fn check_oha_installed() -> Result<()> {
 }
 
 async fn check_server(name: &str, port: u16) -> Result<()> {
-    let url = format!("http://localhost:{}", port);
+    let url = format!("http://localhost:{port}");
     reqwest::get(&url)
         .await
-        .context(format!("{} server is not responding at {}", name, url))?;
+        .context(format!("{name} server is not responding at {url}"))?;
     println!("{} {} server is responding", "✅".green(), name);
     Ok(())
 }
@@ -128,7 +128,7 @@ async fn run_load_test(
     connections: usize,
 ) -> Result<LoadTestResult> {
     println!("\n{} Load Testing {}", "🔥".bold(), name.bold());
-    let url = format!("http://localhost:{}", port);
+    let url = format!("http://localhost:{port}");
     println!("  {} {}", "URL:".dimmed(), url);
     println!(
         "  {} {}s, Connections: {}",
@@ -143,7 +143,7 @@ async fn run_load_test(
     let output = Command::new("oha")
         .arg(&url)
         .arg("-z")
-        .arg(format!("{}s", duration))
+        .arg(format!("{duration}s"))
         .arg("-c")
         .arg(connections.to_string())
         .arg("-H")
@@ -160,7 +160,7 @@ async fn run_load_test(
 
     if !output.status.success() {
         let stderr = String::from_utf8_lossy(&output.stderr);
-        anyhow::bail!("oha failed: {}", stderr);
+        anyhow::bail!("oha failed: {stderr}");
     }
 
     let stdout = String::from_utf8_lossy(&output.stdout);
@@ -292,7 +292,7 @@ async fn save_results(results: &BenchmarkResults, results_dir: &PathBuf) -> Resu
 
     let now = SystemTime::now();
     let date = time_utils::format_date(now);
-    let filename = results_dir.join(format!("loadtest-{}.json", date));
+    let filename = results_dir.join(format!("loadtest-{date}.json"));
 
     let json = format!("{}\n", serde_json::to_string_pretty(results)?);
     fs::write(&filename, json).await?;
@@ -316,22 +316,13 @@ async fn main() -> Result<()> {
         "This test measures concurrent request handling performance\n".dimmed()
     );
 
-    if let Err(e) = check_oha_installed().await {
-        eprintln!("{} {}", "❌".red(), e);
-        std::process::exit(1);
-    }
-
-    if let Err(e) = check_server("rari", args.rari_port).await {
-        eprintln!("{} {}", "❌".red(), e);
-        eprintln!("Please start the rari server with: cd apps/rari && pnpm dev");
-        std::process::exit(1);
-    }
-
-    if let Err(e) = check_server("Next.js", args.nextjs_port).await {
-        eprintln!("{} {}", "❌".red(), e);
-        eprintln!("Please start the Next.js server with: cd apps/nextjs && pnpm dev");
-        std::process::exit(1);
-    }
+    check_oha_installed().await?;
+    check_server("rari", args.rari_port)
+        .await
+        .context("Please start the rari server with: cd apps/rari && pnpm dev")?;
+    check_server("Next.js", args.nextjs_port)
+        .await
+        .context("Please start the Next.js server with: cd apps/nextjs && pnpm dev")?;
 
     println!(
         "\n{}",
