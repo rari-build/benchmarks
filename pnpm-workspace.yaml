@@ -1,64 +1,53 @@
 catalogMode: prefer
+
+minimumReleaseAgeExcludePrune: true
 minimumReleaseAgeExclude:
-  - '@rari/use-cache-darwin-arm64@0.15.8'
-  - '@rari/use-cache-darwin-x64@0.15.8'
-  - '@rari/use-cache-linux-arm64@0.15.8'
-  - '@rari/use-cache-linux-x64@0.15.8'
-  - '@rari/use-cache-win32-arm64@0.15.8'
-  - '@rari/use-cache-win32-x64@0.15.8'
-  - '@rari/use-cache@0.15.8'
-  - rari-darwin-arm64@0.15.8
-  - rari-darwin-x64@0.15.8
-  - rari-linux-arm64@0.15.8
-  - rari-linux-x64@0.15.8
-  - rari-win32-arm64@0.15.8
-  - rari-win32-x64@0.15.8
-  - rari@0.15.8
-  - '@rari/lint@0.1.0'
-  - '@voidzero-dev/vite-plus-core@0.2.8'
-  - '@voidzero-dev/vite-plus-darwin-arm64@0.2.8'
-  - '@voidzero-dev/vite-plus-darwin-x64@0.2.8'
-  - '@voidzero-dev/vite-plus-linux-arm64-gnu@0.2.8'
-  - '@voidzero-dev/vite-plus-linux-arm64-musl@0.2.8'
-  - '@voidzero-dev/vite-plus-linux-x64-gnu@0.2.8'
-  - '@voidzero-dev/vite-plus-linux-x64-musl@0.2.8'
-  - '@voidzero-dev/vite-plus-win32-arm64-msvc@0.2.8'
-  - '@voidzero-dev/vite-plus-win32-x64-msvc@0.2.8'
-  - vite-plus@0.2.8
+  - rari-darwin-arm64@0.17.3
+  - rari-darwin-x64@0.17.3
+  - rari-linux-arm64@0.17.3
+  - rari-linux-x64@0.17.3
+  - rari-win32-arm64@0.17.3
+  - rari-win32-x64@0.17.3
+  - rari@0.17.3
+
 shellEmulator: true
+
 trustPolicy: no-downgrade
 trustPolicyExclude:
   - semver@6.3.1
+
 packages:
   - apps/nextjs
   - apps/rari
   - shared
+
 catalogs:
   build:
-    vite-plus: ^0.2.8
+    vite-plus: ^1.1.0
   default:
-    '@rari/lint': ^0.1.1
-    rari: ^0.15.9
+    '@rari/lint': ^0.1.5
+    rari: ^0.17.3
   eslint:
-    eslint: ^10.8.1
-    knip: ^6.32.0
+    eslint: ^10.12.0
+    knip: ^6.40.0
   md:
-    markdown-it: ^15.0.0
+    markdown-it: ^15.0.2
   nextjs:
-    next: ^16.3.0
+    next: ^16.4.0
   react:
-    '@types/react': ^19.2.18
-    '@types/react-dom': ^19.2.4
-    react: ^19.2.8
-    react-dom: ^19.2.8
+    '@types/react': ^19.3.0
+    '@types/react-dom': ^19.3.0
+    react: ^19.3.0
+    react-dom: ^19.3.0
   tailwind:
     '@tailwindcss/postcss': ^4.3.3
     '@tailwindcss/vite': ^4.3.3
     tailwindcss: ^4.3.3
   typescript:
-    '@types/node': ^26.2.0
+    '@types/node': ^26.6.4
     # https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/#running-side-by-side-with-typescript-6.0
     typescript: npm:@typescript/typescript6@^6.0.2
     typescript-7: npm:typescript@^7.0.2
+
 allowBuilds:
   sharp: true
