@@ -173,7 +173,7 @@ export default async function WhatsHot() {
 
   if (!result.ok) return <WhatsHotError errorMessage={result.errorMessage} />
 
-  // eslint-disable-next-line react/purity
+  // oxlint-disable-next-line react/purity
   const currentTime = new Date().toLocaleTimeString()
   return <WhatsHotFeed data={result.data} currentTime={currentTime} />
 }

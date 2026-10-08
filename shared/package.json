@@ -7,6 +7,9 @@
   "exports": {
     "./components/*": "./src/components/*.tsx",
     "./functions": "./src/functions/index.ts",
+    "./layout": "./src/layout.tsx",
+    "./site-metadata": "./src/site-metadata.ts",
+    "./globals.css": "./src/globals.css",
     "./content/*": "./content/*"
   },
   "scripts": {

@@ -5,7 +5,7 @@
       "project": [".config/**/*.ts"]
     },
     "apps/rari": {
-      "entry": ["src/app/**/*.{ts,tsx}", "index.html"],
+      "entry": ["src/app/**/*.{ts,tsx}"],
       "project": ["src/**/*.{ts,tsx,css}"],
       "ignoreDependencies": [
         "@rari/lint", // Used via root .config/lint imported from vite.config.ts

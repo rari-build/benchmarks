@@ -2,14 +2,14 @@
   "compilerOptions": {
     "target": "ES2020",
     "jsx": "react-jsx",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["DOM", "DOM.Iterable", "ES2020"],
     "useDefineForClassFields": true,
     "module": "ESNext",
     "moduleResolution": "bundler",
     "paths": {
       "*": ["./*"],
       "@/*": ["./src/*"],
-      "@benchmark/shared": ["../../shared/src"]
+      "@benchmark/shared/*": ["../../shared/src/*"]
     },
     "resolveJsonModule": true,
     "allowImportingTsExtensions": true,
