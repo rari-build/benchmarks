@@ -22,7 +22,7 @@ function renderGroceryItem(item: Readonly<TodoItem>) {
 
 export default function ShoppingList() {
   const groceries = getTodosList()
-  // eslint-disable-next-line react/purity
+  // oxlint-disable-next-line eslint-react/purity
   const timestamp = new Date().toLocaleTimeString()
 
   return (

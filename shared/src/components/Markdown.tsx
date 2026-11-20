@@ -104,7 +104,7 @@ function MarkdownContent({ html }: { readonly html: string }) {
       </style>
       <div
         className="markdown-content"
-        // eslint-disable-next-line react/dom-no-dangerously-set-innerhtml
+        // oxlint-disable-next-line eslint-react/dom-no-dangerously-set-innerhtml
         dangerouslySetInnerHTML={{ __html: html }}
       />
     </div>

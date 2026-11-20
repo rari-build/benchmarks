@@ -23,7 +23,7 @@ export default function TestComponent({ a = 5, b = 10 }: TestComponentProps) {
           <small className="ml-1 text-gray-500">(server)</small>
         </p>
         <small className="block mt-2 text-xs text-gray-500">
-          Rendered at: {/* eslint-disable-next-line react/purity */}
+          Rendered at: {/* oxlint-disable-next-line eslint-react/purity */}
           {new Date().toLocaleTimeString()}
         </small>
       </div>

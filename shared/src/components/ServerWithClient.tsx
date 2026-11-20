@@ -2,7 +2,7 @@ import Counter from './Counter'
 
 export default function ServerWithClient() {
   const serverData = {
-    // eslint-disable-next-line react/purity
+    // oxlint-disable-next-line eslint-react/purity
     timestamp: new Date().toISOString(),
     message: 'This data was generated on the server',
   }

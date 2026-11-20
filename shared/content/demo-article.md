@@ -34,7 +34,7 @@ export default async function MarkdownComponent() {
   const html = md.render(content)
 
   return (
-    // eslint-disable-next-line react/dom-no-dangerously-set-innerhtml
+    // oxlint-disable-next-line eslint-react/dom-no-dangerously-set-innerhtml
     <div dangerouslySetInnerHTML={{ __html: html }} />
   )
 }
