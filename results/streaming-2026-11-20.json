@@ -1,0 +1,89 @@
+{
+  "timestamp": "2026-11-20T23:33:23Z",
+  "config": {
+    "runs": 5,
+    "timeout_secs": 15,
+    "duration_secs": 15,
+    "connections": 25,
+    "profile_only": false
+  },
+  "rari": {
+    "path": "/stream",
+    "runs": 5,
+    "successful": 5,
+    "profile": {
+      "ttfb_ms": 1.01,
+      "firstContentChunk_ms": 117.559,
+      "lastByte_ms": 1019.714,
+      "chunks": 15,
+      "resolvedCards": 10,
+      "interChunkGap_ms": {
+        "mean": 72.65,
+        "p50": 0.109,
+        "p95": 400.085,
+        "max": 501.289
+      },
+      "skeletonDuration_ms": 1018.565,
+      "progressiveBytes": {
+        "500ms": 20220,
+        "1000ms": 21881,
+        "2000ms": 36551,
+        "5000ms": 36551
+      },
+      "progressiveResolved": {
+        "500ms": 5,
+        "1000ms": 8,
+        "2000ms": 10,
+        "5000ms": 10
+      }
+    },
+    "throughput": {
+      "req_s": 24.99,
+      "latency_avg_ms": 1033.605,
+      "latency_p95_ms": 1106.333,
+      "errors": 0
+    }
+  },
+  "nextjs": {
+    "path": "/stream",
+    "runs": 5,
+    "successful": 5,
+    "profile": {
+      "ttfb_ms": 11.879,
+      "firstContentChunk_ms": 109.282,
+      "lastByte_ms": 1010.56,
+      "chunks": 10,
+      "resolvedCards": 10,
+      "interChunkGap_ms": {
+        "mean": 110.86,
+        "p50": 0.75,
+        "p95": 499.266,
+        "max": 499.266
+      },
+      "skeletonDuration_ms": 997.772,
+      "progressiveBytes": {
+        "500ms": 17219,
+        "1000ms": 18746,
+        "2000ms": 19789,
+        "5000ms": 19789
+      },
+      "progressiveResolved": {
+        "500ms": 5,
+        "1000ms": 8,
+        "2000ms": 10,
+        "5000ms": 10
+      }
+    },
+    "throughput": {
+      "req_s": 24.99,
+      "latency_avg_ms": 1009.592,
+      "latency_p95_ms": 1026.522,
+      "errors": 0
+    }
+  },
+  "comparison": {
+    "ttfb_ratio": 11.76,
+    "lastByte_ratio": 0.99,
+    "throughput_ratio": 1.0
+  }
+}
