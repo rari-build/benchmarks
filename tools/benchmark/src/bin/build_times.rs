@@ -112,7 +112,15 @@ async fn run_build(name: &str, directory: &Path, command: &str) -> Result<BuildR
 async fn get_bundle_info(name: &str, directory: &Path) -> Result<(Option<String>, Option<usize>)> {
     let (dist_dir, extensions): (PathBuf, Vec<&str>) = match name {
         "Next.js" => (directory.join(".next/static/chunks"), vec!["js", "css"]),
-        "rari" => (directory.join("dist/assets"), vec!["js", "css"]),
+        "rari" => {
+            let client_assets = directory.join("dist/client/assets");
+            let dir = if client_assets.exists() {
+                client_assets
+            } else {
+                directory.join("dist/assets")
+            };
+            (dir, vec!["js", "css"])
+        }
         _ => return Ok((None, None)),
     };
 
